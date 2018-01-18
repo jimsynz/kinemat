@@ -23,9 +23,10 @@ defimpl Kinemat.Orientation, for: Kinemat.Quaternion do
       }}
 
   """
-  @spec to_rotation_matrix(Quaternion.t) :: RotationMatrix.t
+  @spec to_rotation_matrix(Quaternion.t()) :: RotationMatrix.t()
   def to_rotation_matrix(%Quaternion{w: w, x: x, y: y, z: z}) do
     {_, r} = Angle.to_radians(w)
+
     r
     |> Quatern.create(x, y, z)
     |> Quatern.to_rotation_matrix()
@@ -35,7 +36,7 @@ defimpl Kinemat.Orientation, for: Kinemat.Quaternion do
   @doc """
   Does nothing, simply returns the Quaternion.
   """
-  @spec to_quaternion(Quaternion.t) :: Quaternion.t
+  @spec to_quaternion(Quaternion.t()) :: Quaternion.t()
   def to_quaternion(orientation), do: orientation
 
   @doc """
@@ -51,7 +52,7 @@ defimpl Kinemat.Orientation, for: Kinemat.Quaternion do
                      y: ~a(0.2945952073784124)r,
                      z: ~a(0.12377521877974283)r}
   """
-  @spec to_euler(Quaternion.t, Euler.valid_representation) :: Euler.t
+  @spec to_euler(Quaternion.t(), Euler.valid_representation()) :: Euler.t()
   def to_euler(orientation, representation \\ :xyz) do
     orientation
     |> Orientation.to_rotation_matrix()

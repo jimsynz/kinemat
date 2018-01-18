@@ -11,7 +11,7 @@ defmodule Kinemat.Mixfile do
       app: :kinemat,
       version: @version,
       elixir: "~> 1.5",
-      start_permanent: Mix.env == :prod,
+      start_permanent: Mix.env() == :prod,
       package: package(),
       deps: deps(),
       description: @description
@@ -20,8 +20,8 @@ defmodule Kinemat.Mixfile do
 
   def package do
     [
-      maintainers: [ "James Harton <james@automat.nz>" ],
-      licenses: [ "MIT" ],
+      maintainers: ["James Harton <james@automat.nz>"],
+      licenses: ["MIT"],
       links: %{
         "Source" => "https://gitlab.com/jimsy/kinemat"
       }
@@ -43,9 +43,8 @@ defmodule Kinemat.Mixfile do
       {:credo, "~> 0.6", only: ~w(dev test)a, runtime: false},
       {:inch_ex, "~> 0.5", only: ~w(dev test)a, runtime: false},
       {:dialyxir, "~> 0.5", only: ~w(dev test)a, runtime: false},
-
       {:graphmath, "~> 1.0"},
-      {:angle, "~> 0.2"}
+      {:angle, ">= 0.2.1"}
     ]
   end
 end

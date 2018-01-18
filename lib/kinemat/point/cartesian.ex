@@ -12,7 +12,7 @@ defimpl Kinemat.Point, for: Kinemat.Cartesian do
       ...> |> Kinemat.Point.to_cartesian()
       %Kinemat.Cartesian{x: 1, y: 2, z: 3}
   """
-  @spec to_cartesian(Cartesian.t) :: Cartesian.t
+  @spec to_cartesian(Cartesian.t()) :: Cartesian.t()
   def to_cartesian(%Cartesian{} = point), do: point
 
   @doc """
@@ -27,9 +27,9 @@ defimpl Kinemat.Point, for: Kinemat.Cartesian do
         azimuth:  %Angle{r: 0.9272952180016122},
         vertical: 7}
   """
-  @spec to_cylindrical(Cartesian.t) :: Cylindrical.t
+  @spec to_cylindrical(Cartesian.t()) :: Cylindrical.t()
   def to_cylindrical(%Cartesian{x: x, y: y, z: z}) do
-    r     = sqrt(pow(x, 2) + pow(y, 2))
+    r = sqrt(pow(x, 2) + pow(y, 2))
     theta = Radian.init(atan(y / x))
     Cylindrical.init(r, theta, z)
   end
@@ -46,11 +46,11 @@ defimpl Kinemat.Point, for: Kinemat.Cartesian do
         azimuth: %Angle{r: 0.4234308319224211},
         polar:   %Angle{r: 0.982793723247329}}
   """
-  @spec to_spherical(Cartesian.t) :: Sperical.t
+  @spec to_spherical(Cartesian.t()) :: Sperical.t()
   def to_spherical(%Cartesian{x: x, y: y, z: z}) do
-    rho   = sqrt(pow(x, 2) + pow(y, 2) + pow(z, 2))
+    rho = sqrt(pow(x, 2) + pow(y, 2) + pow(z, 2))
     theta = Radian.init(acos(z / rho))
-    phi   = Radian.init(atan(y / x))
+    phi = Radian.init(atan(y / x))
     Spherical.init(rho, theta, phi)
   end
 end

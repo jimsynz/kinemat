@@ -6,10 +6,7 @@ defmodule Kinemat.Quaternion do
   Describes an orientation using Quaternions.
   """
 
-  @type t :: %Quaternion{w: Angle.t,
-                         x: number,
-                         y: number,
-                         z: number}
+  @type t :: %Quaternion{w: Angle.t(), x: number, y: number, z: number}
 
   @doc """
   Create a Quaternion using `w`, `x`, `y` and `z` where
@@ -22,13 +19,13 @@ defmodule Kinemat.Quaternion do
       iex> Quaternion.init(~a(90)d, 10, 20, 30)
       %Kinemat.Quaternion{w: ~a(90)d, x: 10, y: 20, z: 30}
   """
-  @spec init(Angle.t, number, number, number) :: t
+  @spec init(Angle.t(), number, number, number) :: t
   def init(%Angle{} = w, x, y, z), do: %Quaternion{w: w, x: x, y: y, z: z}
 
   @doc """
   Returns the `w` component of the Quaternion.
   """
-  @spec w(t) :: Angle.t
+  @spec w(t) :: Angle.t()
   def w(%Quaternion{w: w}), do: w
 
   @doc """

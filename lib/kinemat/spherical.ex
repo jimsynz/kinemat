@@ -6,21 +6,19 @@ defmodule Kinemat.Spherical do
   Describes a point in 3D space using sperical notation (r,θ,ɸ).
   """
 
-  @type t :: %Spherical{radial:  number,
-                        azimuth: Angle.t,
-                        polar:   Angle.t}
+  @type t :: %Spherical{radial: number, azimuth: Angle.t(), polar: Angle.t()}
 
   @doc """
   Initialise a sperical coordinate point from `rho`, `theta` and `phi` (r,θ,ɸ).
 
   ## Examples
 
-      iex> Spherical.init(10, Degrees.init(20), Degrees.init(30))
+      iex> Spherical.init(10, ~a(20)d, ~a(30)d)
       %Kinemat.Spherical{radial:  10,
                          azimuth: ~a(20)d,
                          polar:   ~a(30)d}
   """
-  @spec init(number, Angle.t, Angle.t) :: t
+  @spec init(number, Angle.t(), Angle.t()) :: t
   def init(rho, %Angle{} = theta, %Angle{} = phi) do
     %Spherical{radial: rho, azimuth: theta, polar: phi}
   end
@@ -46,25 +44,25 @@ defmodule Kinemat.Spherical do
   @doc """
   Alias for `azimuth/1`.
   """
-  @spec theta(t) :: Angle.t
+  @spec theta(t) :: Angle.t()
   def theta(point), do: point |> azimuth()
 
   @doc """
-  Return the azimuthal component of the point.
+    Return the azimuthal component of the point.
 
-  ## Examples
+    ## Examples
 
-      iex> Spherical.init(10, ~a(20)d, ~a(30)d)
-      ...> |> Spherical.azimuth
-      ~a(20)d
-"""
-  @spec azimuth(t) :: Angle.t
+        iex> Spherical.init(10, ~a(20)d, ~a(30)d)
+        ...> |> Spherical.azimuth
+        ~a(20)d
+  """
+  @spec azimuth(t) :: Angle.t()
   def azimuth(%Spherical{azimuth: theta}), do: theta
 
   @doc """
   Alias for `polar/1`.
   """
-  @spec phi(t) :: Angle.t
+  @spec phi(t) :: Angle.t()
   def phi(point), do: point |> polar()
 
   @doc """
@@ -76,6 +74,6 @@ defmodule Kinemat.Spherical do
       ...> |> Spherical.polar
       ~a(30)d
   """
-  @spec polar(t) :: Angle.t
+  @spec polar(t) :: Angle.t()
   def polar(%Spherical{polar: phi}), do: phi
 end

@@ -9,8 +9,12 @@ defmodule Kinemat.Euler do
   YZX, ZXY.
   """
   @type valid_representation :: :xyz | :yxz | :zxy | :zyx | :yzx | :xzy
-  @type t :: %Euler{representation: valid_representation,
-                    x: Angle.t, y: Angle.t, z: Angle.t}
+  @type t :: %Euler{
+          representation: valid_representation,
+          x: Angle.t(),
+          y: Angle.t(),
+          z: Angle.t()
+        }
 
   @doc """
   Initialise a new Euler orientation with angles.
@@ -28,10 +32,9 @@ defmodule Kinemat.Euler do
                      y: ~a(20)d,
                      z: ~a(30)d}
   """
-  @spec init(valid_representation, Angle.t, Angle.t, Angle.t) :: t
-  def init(representation, x, y, z)
-  when representation in ~w(xyz yxz zxy zyx yzx xzy)a
-  do
+  @spec init(valid_representation, Angle.t(), Angle.t(), Angle.t()) :: t
+  def init(representation, %Angle{} = x, %Angle{} = y, %Angle{} = z)
+      when representation in ~w(xyz yxz zxy zyx yzx xzy)a do
     %Euler{representation: representation, x: x, y: y, z: z}
   end
 
@@ -62,7 +65,7 @@ defmodule Kinemat.Euler do
       ...> |> Euler.x
       #Angle<13°>
   """
-  @spec x(t) :: Angle.t
+  @spec x(t) :: Angle.t()
   def x(%Euler{x: x}), do: x
 
   @doc """
@@ -74,7 +77,7 @@ defmodule Kinemat.Euler do
       ...> |> Euler.y
       #Angle<13°>
   """
-  @spec y(t) :: Angle.t
+  @spec y(t) :: Angle.t()
   def y(%Euler{y: y}), do: y
 
   @doc """
@@ -86,6 +89,6 @@ defmodule Kinemat.Euler do
       ...> |> Euler.z
       #Angle<13°>
   """
-  @spec z(t) :: Angle.t
+  @spec z(t) :: Angle.t()
   def z(%Euler{z: z}), do: z
 end

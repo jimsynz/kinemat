@@ -17,8 +17,9 @@ defimpl Kinemat.Orientation, for: Kinemat.Euler do
         -0.33036608954935215,  0.7695370178986853,   0.5465080282662533,
          0.25881904510252074, -0.4829629131445341,   0.8365163037378079}}
   """
-  @spec to_rotation_matrix(Euler.t) :: RotationMatrix.t
-  def to_rotation_matrix(euler), do: Euler.ToRotationMatrix.to_rotation_matrix(euler)
+  @spec to_rotation_matrix(Euler.t()) :: RotationMatrix.t()
+  def to_rotation_matrix(euler),
+    do: Euler.ToRotationMatrix.to_rotation_matrix(euler)
 
   @doc """
   Convert the euler angle into quaternion.
@@ -32,8 +33,9 @@ defimpl Kinemat.Orientation, for: Kinemat.Euler do
       %Kinemat.Quaternion{w: ~a(0.9372468582005039)r, x: 0.27459973122432013,
                           y: 0.07960424450132775,    z: 0.19956572516889892}
   """
-  @spec to_quaternion(Euler.t) :: Quaternion.t
-  def to_quaternion(orientation), do: Euler.ToQuaternion.to_quaternion(orientation)
+  @spec to_quaternion(Euler.t()) :: Quaternion.t()
+  def to_quaternion(orientation),
+    do: Euler.ToQuaternion.to_quaternion(orientation)
 
   @doc """
   Convert the Euler from one representation to another.
@@ -49,11 +51,14 @@ defimpl Kinemat.Orientation, for: Kinemat.Euler do
                      y: %Angle{r: -0.2617993877991494},
                      z: %Angle{r: -0.3490658503988659}}
   """
-  @spec to_euler(Euler.t) :: Euler.t
+  @spec to_euler(Euler.t()) :: Euler.t()
   def to_euler(%Euler{} = orientation), do: orientation
 
-  @spec to_euler(Euler.t, Euler.valid_representation) :: Euler.t
-  def to_euler(%Euler{representation: r} = orientation, representation) when r == representation, do: orientation
+  @spec to_euler(Euler.t(), Euler.valid_representation()) :: Euler.t()
+  def to_euler(%Euler{representation: r} = orientation, representation)
+      when r == representation,
+      do: orientation
+
   def to_euler(orientation, representation) do
     orientation
     |> Orientation.to_rotation_matrix()

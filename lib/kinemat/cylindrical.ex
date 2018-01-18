@@ -6,9 +6,7 @@ defmodule Kinemat.Cylindrical do
   Describes a point in cylindrical coordinates.
   """
 
-  @type t :: %Cylindrical{radial:   number,
-                          azimuth:  Angle.t,
-                          vertical: number}
+  @type t :: %Cylindrical{radial: number, azimuth: Angle.t(), vertical: number}
 
   @doc """
   Initalise a cylindrical coordinate from `rho`, `theta`, `z` (ρ,θ,z).
@@ -25,7 +23,7 @@ defmodule Kinemat.Cylindrical do
                            azimuth:  ~a(0.5)r,
                            vertical: 30}
   """
-  @spec init(number, Angle.t, number) :: t
+  @spec init(number, Angle.t(), number) :: t
   def init(rho, %Angle{} = theta, z) do
     %Cylindrical{radial: rho, azimuth: theta, vertical: z}
   end
@@ -51,7 +49,7 @@ defmodule Kinemat.Cylindrical do
   @doc """
   Alias for `azimuth/1`.
   """
-  @spec theta(t) :: Angle.t
+  @spec theta(t) :: Angle.t()
   def theta(point), do: point |> azimuth()
 
   @doc """
@@ -63,7 +61,7 @@ defmodule Kinemat.Cylindrical do
       ...> |> Cylindrical.azimuth()
       #Angle<0.5㎭>
   """
-  @spec azimuth(t) :: Angle.t
+  @spec azimuth(t) :: Angle.t()
   def azimuth(%Cylindrical{azimuth: theta}), do: theta
 
   @doc """

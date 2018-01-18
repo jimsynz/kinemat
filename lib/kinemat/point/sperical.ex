@@ -18,13 +18,13 @@ defimpl Kinemat.Point, for: Kinemat.Spherical do
         radial:  3.9999999999999996,
         vertical: 6.92820323027551}
   """
-  @spec to_cylindrical(Spherical.t) :: Cylindrical.t
+  @spec to_cylindrical(Spherical.t()) :: Cylindrical.t()
   def to_cylindrical(%Spherical{radial: r, azimuth: theta, polar: phi}) do
     theta1 = theta
-    theta  = phi
+    theta = phi
 
-    r1     = r * sin(theta1)
-    z      = r * cos(theta1)
+    r1 = r * sin(theta1)
+    z = r * cos(theta1)
     Cylindrical.init(r1, theta, z)
   end
 
@@ -40,11 +40,11 @@ defimpl Kinemat.Point, for: Kinemat.Spherical do
         y: 3.554377592712286,
         z: 11.276311449430901}
   """
-  @spec to_cartesian(Spherical.t) :: Cartesian.t
+  @spec to_cartesian(Spherical.t()) :: Cartesian.t()
   def to_cartesian(%Spherical{radial: r, azimuth: theta, polar: phi}) do
-    x     = r * sin(theta) * cos(phi)
-    y     = r * sin(theta) * sin(phi)
-    z     = r * cos(theta)
+    x = r * sin(theta) * cos(phi)
+    y = r * sin(theta) * sin(phi)
+    z = r * cos(theta)
     Cartesian.init(x, y, z)
   end
 
@@ -60,6 +60,6 @@ defimpl Kinemat.Point, for: Kinemat.Spherical do
         polar: ~a(60)d,
         radial: 12}
   """
-  @spec to_spherical(Spherical.t) :: Spherical.t
+  @spec to_spherical(Spherical.t()) :: Spherical.t()
   def to_spherical(point), do: point
 end

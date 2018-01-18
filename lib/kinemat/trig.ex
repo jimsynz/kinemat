@@ -1,4 +1,8 @@
 defmodule Kinemat.Trig do
+  @moduledoc """
+  A simple wrapper around `Angle`'s trig functions for compatibility.
+  """
+
   def sin(%Angle{} = angle) do
     {_, result} = Angle.sin(angle)
     result

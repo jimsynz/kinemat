@@ -6,18 +6,18 @@ defprotocol Kinemat.Orientation do
   different orientations (Euler, RotationMatrix and Quaternion).
   """
 
-  @type t :: Euler.t | RotationMatrix.t | Quaternion.t
+  @type t :: Euler.t() | RotationMatrix.t() | Quaternion.t()
 
   @doc """
   Convert the Orientation into it's Rotation Matrix representation.
   """
-  @spec to_rotation_matrix(Orientation.t) :: RotationMatrix.t
+  @spec to_rotation_matrix(Orientation.t()) :: RotationMatrix.t()
   def to_rotation_matrix(orientation)
 
   @doc """
   Convert the Orientation into it's Quaternion representation.
   """
-  @spec to_quaternion(Orientation.t) :: Quaternion.t
+  @spec to_quaternion(Orientation.t()) :: Quaternion.t()
   def to_quaternion(orientation)
 
   @doc """
@@ -25,13 +25,13 @@ defprotocol Kinemat.Orientation do
 
   Default representation is `:xyz`.
   """
-  @spec to_euler(Orientation.t) :: Euler.t
+  @spec to_euler(Orientation.t()) :: Euler.t()
   def to_euler(orientation)
 
   @doc """
   Convert the Orientation into it's Euler angle representation in the
   specified axis order.
   """
-  @spec to_euler(Orientation.t, Euler.valid_representation) :: Euler.t
+  @spec to_euler(Orientation.t(), Euler.valid_representation()) :: Euler.t()
   def to_euler(orientation, representation)
 end

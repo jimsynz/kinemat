@@ -7,17 +7,15 @@ defmodule Kinemat.Frame do
   parent reference frame.
   """
 
-  @type t :: %Frame{point: Point.t,
-                    orientation: Orientation.t}
+  @type t :: %Frame{point: Point.t(), orientation: Orientation.t()}
 
   @doc """
   Initialise a frame from a point and an orientation.
   """
-  @spec init(Point.t, Orientation.t) :: t
+  @spec init(Point.t(), Orientation.t()) :: t
   def init(%{__struct__: p} = point, %{__struct__: o} = orientation)
-  when (p == Cartesian or p == Cylindrical or p == Spherical)
-  and  (o == Euler or o == Quaternion or o == RotationMatrix)
-  do
+      when (p == Cartesian or p == Cylindrical or p == Spherical) and
+             (o == Euler or o == Quaternion or o == RotationMatrix) do
     %Frame{point: point, orientation: orientation}
   end
 
@@ -30,7 +28,7 @@ defmodule Kinemat.Frame do
       ...> |> Frame.point()
       #Kinemat.Point<[x: 3, y: 4, z: 5]>
   """
-  @spec point(t) :: Point.t
+  @spec point(t) :: Point.t()
   def point(%Frame{point: p}), do: p
 
   @doc """
@@ -42,6 +40,6 @@ defmodule Kinemat.Frame do
       ...> |> Frame.orientation()
       #Kinemat.Orientation<[euler: :xyz, x: #Angle<0>, y: #Angle<0>, z: #Angle<0>]>
   """
-  @spec orientation(t) :: Orientation.t
+  @spec orientation(t) :: Orientation.t()
   def orientation(%Frame{orientation: o}), do: o
 end

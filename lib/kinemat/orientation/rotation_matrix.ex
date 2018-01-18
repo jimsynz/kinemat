@@ -10,7 +10,7 @@ defimpl Kinemat.Orientation, for: Kinemat.RotationMatrix do
   @doc """
   Does nothing, simply returns the rotation matrix.
   """
-  @spec to_rotation_matrix(RotationMatrix.t) :: RotationMatrix.t
+  @spec to_rotation_matrix(RotationMatrix.t()) :: RotationMatrix.t()
   def to_rotation_matrix(orientation), do: orientation
 
   @doc """
@@ -24,10 +24,12 @@ defimpl Kinemat.Orientation, for: Kinemat.RotationMatrix do
     ...> |> Orientation.to_quaternion()
     %Kinemat.Quaternion{w: ~a(0.7071067811865476)r, x: 0.7071067811865475, y: 0.0, z: 0.0}
   """
-  @spec to_quaternion(RotationMatrix.t) :: Quaternion.t
+  @spec to_quaternion(RotationMatrix.t()) :: Quaternion.t()
   def to_quaternion(%RotationMatrix{matrix: matrix}) do
-    {w, x, y, z} = matrix
+    {w, x, y, z} =
+      matrix
       |> Quatern.from_rotation_matrix()
+
     Quaternion.init(Radian.init(w), x, y, z)
   end
 
@@ -41,13 +43,15 @@ defimpl Kinemat.Orientation, for: Kinemat.RotationMatrix do
     ...> |> RotationMatrix.init()
     ...> |> Orientation.to_euler()
     %Kinemat.Euler{representation: :xyz,
-                   x: %Angle{r: 3.141592653589793},
-                   y: %Angle{r: 0.0},
-                   z: %Angle{r: -1.5707963267948966}}
+                   x: ~a(3.141592653589793)r,
+                   y: ~a(0),
+                   z: ~a(-1.5707963267948966)r}
   """
-  @spec to_euler(RotationMatrix.t) :: Euler.t
-  def to_euler(orientation), do: RotationMatrix.ToEuler.to_euler(orientation, :xyz)
+  @spec to_euler(RotationMatrix.t()) :: Euler.t()
+  def to_euler(orientation),
+    do: RotationMatrix.ToEuler.to_euler(orientation, :xyz)
 
-  @spec to_euler(RotationMatrix.t, Euler.valid_orientation) :: Euler.t
-  def to_euler(orientation, representation), do: RotationMatrix.ToEuler.to_euler(orientation, representation)
+  @spec to_euler(RotationMatrix.t(), Euler.valid_orientation()) :: Euler.t()
+  def to_euler(orientation, representation),
+    do: RotationMatrix.ToEuler.to_euler(orientation, representation)
 end

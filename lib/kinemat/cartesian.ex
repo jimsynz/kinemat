@@ -6,9 +6,7 @@ defmodule Kinemat.Cartesian do
   Describes a point in three-dimensional space using cartesian coordinates (x, y, z).
   """
 
-  @type t :: %Cartesian{x: number,
-                        y: number,
-                        z: number}
+  @type t :: %Cartesian{x: number, y: number, z: number}
 
   @doc """
   Initialise a cartesian point from `x`, `y` and `z`.

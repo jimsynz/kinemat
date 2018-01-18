@@ -12,7 +12,7 @@ defmodule Kinemat.Euler.ToQuaternion do
   @doc """
   Converts Euler orientations into Quaternions.
   """
-  @spec to_quaternion(Euler.t) :: Quaternion.t
+  @spec to_quaternion(Euler.t()) :: Quaternion.t()
   def to_quaternion(%Euler{representation: order, x: x, y: y, z: z}) do
     {_, x} = Angle.to_radians(x)
     {_, y} = Angle.to_radians(y)
