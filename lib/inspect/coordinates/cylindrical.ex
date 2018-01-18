@@ -1,7 +1,8 @@
-defimpl Inspect, for: Kinemat.Spherical do
+defimpl Inspect, for: Kinemat.Coordinates.Cylindrical do
+  alias Kinemat.Coordinates.Cylindrical
   import Inspect.Algebra
 
-  @spec inspect(Angle.t(), any) :: String.t()
+  @spec inspect(Cylindrical.t(), any) :: String.t()
   def inspect(angle, opts) do
     angle =
       angle

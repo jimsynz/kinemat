@@ -1,5 +1,5 @@
-defimpl Kinemat.Point, for: Kinemat.Cylindrical do
-  alias Kinemat.{Cylindrical, Cartesian, Spherical}
+defimpl Kinemat.Point, for: Kinemat.Coordinates.Cylindrical do
+  use Kinemat.Coordinates
   alias Angle.Radian
   import :math, only: [atan: 1, pow: 2, sqrt: 1]
   import Kinemat.Trig, only: [sin: 1, cos: 1]
@@ -15,7 +15,7 @@ defimpl Kinemat.Point, for: Kinemat.Cylindrical do
 
       iex> Cylindrical.init(3, ~a(10)d, 9)
       ...> |> Point.to_cylindrical()
-      %Kinemat.Cylindrical{
+      %Cylindrical{
         azimuth:  ~a(10)d,
         radial:   3,
         vertical: 9}
@@ -30,7 +30,7 @@ defimpl Kinemat.Point, for: Kinemat.Cylindrical do
 
       iex> Cylindrical.init(3, ~a(10)d, 9)
       ...> |> Point.to_cartesian()
-      %Kinemat.Cartesian{x: 2.954423259036624, y: 0.520944533000791, z: 9}
+      %Cartesian{x: 2.954423259036624, y: 0.520944533000791, z: 9}
   """
   @spec to_cartesian(Cylindrical.t()) :: Cartesian.t()
   def to_cartesian(%Cylindrical{radial: r, azimuth: theta, vertical: z}) do
@@ -44,9 +44,9 @@ defimpl Kinemat.Point, for: Kinemat.Cylindrical do
 
   ## Examples
 
-      iex> Kinemat.Cylindrical.init(3, ~a(20)d, 4)
-      ...> |> Kinemat.Point.to_spherical()
-      %Kinemat.Spherical{
+      iex> Cylindrical.init(3, ~a(20)d, 4)
+      ...> |> Point.to_spherical()
+      %Spherical{
         azimuth: ~a(0.6435011087932844)r,
         polar:   ~a(20)d,
         radial:  5.0}

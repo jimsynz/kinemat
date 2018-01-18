@@ -1,5 +1,6 @@
 defmodule Kinemat.Point.SphericalTest do
   use ExUnit.Case
   use Kinemat
-  doctest Kinemat.Point.Kinemat.Spherical
+  use Kinemat.Coordinates
+  doctest Kinemat.Point.Kinemat.Coordinates.Spherical
 end

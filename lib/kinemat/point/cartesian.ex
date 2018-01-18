@@ -1,6 +1,6 @@
-defimpl Kinemat.Point, for: Kinemat.Cartesian do
+defimpl Kinemat.Point, for: Kinemat.Coordinates.Cartesian do
   import :math, only: [pow: 2, sqrt: 1, atan: 1, acos: 1]
-  alias Kinemat.{Cartesian, Cylindrical, Spherical}
+  use Kinemat.Coordinates
   alias Angle.Radian
 
   @doc """
@@ -8,9 +8,9 @@ defimpl Kinemat.Point, for: Kinemat.Cartesian do
 
   ## Examples
 
-      iex> Kinemat.Cartesian.init(1,2,3)
+      iex> Cartesian.init(1,2,3)
       ...> |> Kinemat.Point.to_cartesian()
-      %Kinemat.Cartesian{x: 1, y: 2, z: 3}
+      %Cartesian{x: 1, y: 2, z: 3}
   """
   @spec to_cartesian(Cartesian.t()) :: Cartesian.t()
   def to_cartesian(%Cartesian{} = point), do: point
@@ -20,9 +20,9 @@ defimpl Kinemat.Point, for: Kinemat.Cartesian do
 
   ## Examples
 
-      iex> Kinemat.Cartesian.init(3, 4, 7)
+      iex> Cartesian.init(3, 4, 7)
       ...> |> Kinemat.Point.to_cylindrical()
-      %Kinemat.Cylindrical{
+      %Cylindrical{
         radial:   5.0,
         azimuth:  %Angle{r: 0.9272952180016122},
         vertical: 7}
@@ -39,9 +39,9 @@ defimpl Kinemat.Point, for: Kinemat.Cartesian do
 
   ## Examples
 
-      iex> Kinemat.Cartesian.init(2,3,8)
+      iex> Cartesian.init(2,3,8)
       ...> |> Kinemat.Point.to_spherical()
-      %Kinemat.Spherical{
+      %Spherical{
         radial:  8.774964387392123,
         azimuth: %Angle{r: 0.4234308319224211},
         polar:   %Angle{r: 0.982793723247329}}

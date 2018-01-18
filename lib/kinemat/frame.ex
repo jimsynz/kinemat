@@ -1,5 +1,6 @@
 defmodule Kinemat.Frame do
   use Kinemat
+  use Kinemat.Coordinates
   defstruct ~w(point orientation)a
 
   @moduledoc """

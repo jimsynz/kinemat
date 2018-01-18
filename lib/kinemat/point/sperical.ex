@@ -1,5 +1,5 @@
-defimpl Kinemat.Point, for: Kinemat.Spherical do
-  alias Kinemat.{Spherical, Cylindrical, Cartesian}
+defimpl Kinemat.Point, for: Kinemat.Coordinates.Spherical do
+  use Kinemat.Coordinates
   import Kinemat.Trig, only: [sin: 1, cos: 1]
 
   @moduledoc """
@@ -11,9 +11,9 @@ defimpl Kinemat.Point, for: Kinemat.Spherical do
 
   ## Examples
 
-      iex> Kinemat.Spherical.init(8, ~a(30)d, ~a(20)d)
+      iex> Spherical.init(8, ~a(30)d, ~a(20)d)
       ...> |> Kinemat.Point.to_cylindrical()
-      %Kinemat.Cylindrical{
+      %Cylindrical{
         azimuth: ~a(20)d,
         radial:  3.9999999999999996,
         vertical: 6.92820323027551}
@@ -33,9 +33,9 @@ defimpl Kinemat.Point, for: Kinemat.Spherical do
 
   ## Examples
 
-      iex> Kinemat.Spherical.init(12, ~a(20)d, ~a(60)d)
+      iex> Spherical.init(12, ~a(20)d, ~a(60)d)
       ...> |> Kinemat.Point.to_cartesian()
-      %Kinemat.Cartesian{
+      %Cartesian{
         x: 2.052120859954013,
         y: 3.554377592712286,
         z: 11.276311449430901}
@@ -53,9 +53,9 @@ defimpl Kinemat.Point, for: Kinemat.Spherical do
 
   ## Examples
 
-      iex> Kinemat.Spherical.init(12, ~a(20)d, ~a(60)d)
+      iex> Spherical.init(12, ~a(20)d, ~a(60)d)
       ...> |> Kinemat.Point.to_spherical()
-      %Kinemat.Spherical{
+      %Spherical{
         azimuth: ~a(20)d,
         polar: ~a(60)d,
         radial: 12}

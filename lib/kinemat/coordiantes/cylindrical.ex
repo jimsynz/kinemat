@@ -1,6 +1,7 @@
-defmodule Kinemat.Cylindrical do
+defmodule Kinemat.Coordinates.Cylindrical do
   defstruct ~w(radial azimuth vertical)a
-  alias Kinemat.Cylindrical
+  use Kinemat.Coordinates
+  alias __MODULE__
 
   @moduledoc """
   Describes a point in cylindrical coordinates.
@@ -14,14 +15,14 @@ defmodule Kinemat.Cylindrical do
   ## Examples
 
       iex> Cylindrical.init(10, ~a(20)d, 30)
-      %Kinemat.Cylindrical{radial:   10,
-                           azimuth:  ~a(20)d,
-                           vertical: 30}
+      %Cylindrical{radial:   10,
+                   azimuth:  ~a(20)d,
+                   vertical: 30}
 
       iex> Cylindrical.init(10, ~a(0.5)r, 30)
-      %Kinemat.Cylindrical{radial:   10,
-                           azimuth:  ~a(0.5)r,
-                           vertical: 30}
+      %Cylindrical{radial:   10,
+                   azimuth:  ~a(0.5)r,
+                   vertical: 30}
   """
   @spec init(number, Angle.t(), number) :: t
   def init(rho, %Angle{} = theta, z) do

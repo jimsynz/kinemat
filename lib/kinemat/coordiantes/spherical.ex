@@ -1,5 +1,5 @@
-defmodule Kinemat.Spherical do
-  alias Kinemat.Spherical
+defmodule Kinemat.Coordinates.Spherical do
+  alias __MODULE__
   defstruct ~w(radial azimuth polar)a
 
   @moduledoc """
@@ -14,9 +14,9 @@ defmodule Kinemat.Spherical do
   ## Examples
 
       iex> Spherical.init(10, ~a(20)d, ~a(30)d)
-      %Kinemat.Spherical{radial:  10,
-                         azimuth: ~a(20)d,
-                         polar:   ~a(30)d}
+      %Kinemat.Coordinates.Spherical{radial:  10,
+                                    azimuth: ~a(20)d,
+                                    polar:   ~a(30)d}
   """
   @spec init(number, Angle.t(), Angle.t()) :: t
   def init(rho, %Angle{} = theta, %Angle{} = phi) do

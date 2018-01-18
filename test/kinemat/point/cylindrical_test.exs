@@ -1,5 +1,6 @@
 defmodule Kinemat.Point.CylindricalTest do
   use ExUnit.Case
   use Kinemat
-  doctest Kinemat.Point.Kinemat.Cylindrical
+  use Kinemat.Coordinates
+  doctest Kinemat.Point.Kinemat.Coordinates.Cylindrical
 end

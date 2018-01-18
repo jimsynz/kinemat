@@ -17,8 +17,7 @@ defmodule Kinemat.HomogeneousTransformation do
       Creating a homogeneous transformation from a nil rotation and nil offset
       returns the identity matrix.
 
-      iex> use Kinemat
-      ...> point = Cartesian.init(0.0, 0.0, 0.0)
+      iex> point = Cartesian.init(0.0, 0.0, 0.0)
       ...> orientation = Euler.init(:xyz, ~a(0), ~a(0), ~a(0))
       ...> Frame.init(point, orientation)
       ...> |> Kinemat.HomogeneousTransformation.to_homogeneous_transformation()

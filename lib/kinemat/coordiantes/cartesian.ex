@@ -1,4 +1,4 @@
-defmodule Kinemat.Cartesian do
+defmodule Kinemat.Coordinates.Cartesian do
   defstruct ~w(x y z)a
   alias __MODULE__
 
@@ -13,9 +13,8 @@ defmodule Kinemat.Cartesian do
 
   ## Examples
 
-      iex> use Kinemat
-      ...> Cartesian.init(3, 4, 5)
-      %Kinemat.Cartesian{x: 3, y: 4, z: 5}
+      iex> Cartesian.init(3, 4, 5)
+      %Kinemat.Coordinates.Cartesian{x: 3, y: 4, z: 5}
   """
   @spec init(number, number, number) :: t
   def init(x, y, z) do
@@ -27,8 +26,7 @@ defmodule Kinemat.Cartesian do
 
   ## Examples
 
-      iex> use Kinemat
-      ...> Cartesian.init(3, 4, 5)
+      iex> Cartesian.init(3, 4, 5)
       ...> |> Cartesian.x()
       3
   """
@@ -40,8 +38,7 @@ defmodule Kinemat.Cartesian do
 
   ## Examples
 
-      iex> use Kinemat
-      ...> Cartesian.init(3, 4, 5)
+      iex> Cartesian.init(3, 4, 5)
       ...> |> Cartesian.y()
       4
   """
@@ -53,8 +50,7 @@ defmodule Kinemat.Cartesian do
 
   ## Examples
 
-      iex> use Kinemat
-      ...> Cartesian.init(3, 4, 5)
+      iex> Cartesian.init(3, 4, 5)
       ...> |> Cartesian.z()
       5
   """

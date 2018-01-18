@@ -1,5 +1,6 @@
 defmodule Kinemat.Point.CartesianTest do
   use ExUnit.Case
   use Kinemat
-  doctest Kinemat.Point.Kinemat.Cartesian
+  use Kinemat.Coordinates
+  doctest Kinemat.Point.Kinemat.Coordinates.Cartesian
 end

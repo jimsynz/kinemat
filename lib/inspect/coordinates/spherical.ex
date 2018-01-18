@@ -1,8 +1,7 @@
-defimpl Inspect, for: Kinemat.Cartesian do
-  alias Kinemat.Cartesian
+defimpl Inspect, for: Kinemat.Coordinates.Spherical do
   import Inspect.Algebra
 
-  @spec inspect(Cartesian.t(), any) :: String.t()
+  @spec inspect(Angle.t(), any) :: String.t()
   def inspect(angle, opts) do
     angle =
       angle

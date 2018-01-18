@@ -3,18 +3,17 @@ defmodule Kinemat do
     quote do
       alias Kinemat.{
         Point,
-        Cartesian,
-        Cylindrical,
-        Spherical,
         Orientation,
         Euler,
         RotationMatrix,
         Quaternion,
+        Sperical,
         # Joint, Point, Prismatic, Radians, Revolute, Spherical,
         Frame
       }
 
       import Angle.Sigil
+      # import Kinemet.Sigil
     end
   end
 

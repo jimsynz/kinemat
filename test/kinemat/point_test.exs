@@ -1,5 +1,6 @@
 defmodule KinematPointTest do
   use Kinemat
+  use Kinemat.Coordinates
   use ExUnit.Case
 
   defp pretty_much_equal(lhs, rhs) when is_number(lhs) and is_number(rhs) do
