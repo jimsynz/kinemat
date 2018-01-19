@@ -21,8 +21,7 @@ defmodule Kinemat.RotationMatrixToEulerTest do
     upcased = orientation |> to_string() |> String.upcase()
 
     test "converting to #{upcased} Euler" do
-      computed =
-        RotationMatrix.ToEuler.to_euler(@rotation, unquote(orientation))
+      computed = RotationMatrix.ToEuler.to_euler(@rotation, unquote(orientation))
 
       correct =
         Euler.init(

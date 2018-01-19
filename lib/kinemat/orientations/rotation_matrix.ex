@@ -6,9 +6,7 @@ defmodule Kinemat.Orientations.RotationMatrix do
   Describes a 3 dimension orientation with a Rotation Matrix.
   """
 
-  @type matrix3 ::
-          {number, number, number, number, number, number, number, number,
-           number}
+  @type matrix3 :: {number, number, number, number, number, number, number, number, number}
   @type t :: %RotationMatrix{matrix: matrix3}
 
   @doc """
@@ -21,9 +19,8 @@ defmodule Kinemat.Orientations.RotationMatrix do
   """
   @spec init(matrix3) :: t
   def init({n0, n1, n2, n3, n4, n5, n6, n7, n8} = matrix)
-      when is_number(n0) and is_number(n1) and is_number(n2) and is_number(n3) and
-             is_number(n4) and is_number(n5) and is_number(n6) and is_number(n7) and
-             is_number(n8) do
+      when is_number(n0) and is_number(n1) and is_number(n2) and is_number(n3) and is_number(n4) and
+             is_number(n5) and is_number(n6) and is_number(n7) and is_number(n8) do
     %RotationMatrix{matrix: matrix}
   end
 

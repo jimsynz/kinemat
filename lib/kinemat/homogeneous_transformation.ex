@@ -7,8 +7,8 @@ defmodule Kinemat.HomogeneousTransformation do
   """
 
   @type t ::
-          {number, number, number, number, number, number, number, number,
-           number, number, number, number, number, number, number, number}
+          {number, number, number, number, number, number, number, number, number, number, number,
+           number, number, number, number, number}
 
   @doc """
   Converts a Frame into it's 4x4 matrix representation as a homogeneous transformation.
@@ -35,8 +35,7 @@ defmodule Kinemat.HomogeneousTransformation do
     {m00, m01, m02, m10, m11, m12, m20, m21, m22} = matrix_from(orientation)
     {m03, m13, m23} = coords_from(point)
 
-    {m00, m01, m02, m03, m10, m11, m12, m13, m20, m21, m22, m23, 0.0, 0.0, 0.0,
-     1.0}
+    {m00, m01, m02, m03, m10, m11, m12, m13, m20, m21, m22, m23, 0.0, 0.0, 0.0, 1.0}
   end
 
   defp coords_from(point) do
