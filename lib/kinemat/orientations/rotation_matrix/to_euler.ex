@@ -1,5 +1,6 @@
-defmodule Kinemat.RotationMatrix.ToEuler do
+defmodule Kinemat.Orientations.RotationMatrix.ToEuler do
   use Kinemat
+  use Kinemat.Orientations
   alias Angle.Radian
   import :math, only: [asin: 1, atan2: 2]
 

@@ -1,8 +1,9 @@
 defmodule Kinemat.RotationMatrixToEulerTest do
   use ExUnit.Case
   use Kinemat
+  use Kinemat.Orientations
   alias Angle.Radian
-  doctest Kinemat.RotationMatrix.ToEuler
+  doctest Kinemat.Orientations.RotationMatrix.ToEuler
 
   @rotation RotationMatrix.init({0, 1, 0, 1, 0, 0, 0, 0, -1})
 

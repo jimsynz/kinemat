@@ -1,5 +1,5 @@
-defimpl Kinemat.Orientation, for: Kinemat.RotationMatrix do
-  alias Kinemat.{RotationMatrix, Quaternion, Euler}
+defimpl Kinemat.Orientation, for: Kinemat.Orientations.RotationMatrix do
+  use Kinemat.Orientations
   alias Angle.Radian
   alias Graphmath.Quatern
 
@@ -18,11 +18,10 @@ defimpl Kinemat.Orientation, for: Kinemat.RotationMatrix do
 
   ## Examples
 
-    iex> use Kinemat
-    ...> {0, 1, 0, 1, 0, 0, 0, 0, -1}
+    iex> {0, 1, 0, 1, 0, 0, 0, 0, -1}
     ...> |> RotationMatrix.init()
     ...> |> Orientation.to_quaternion()
-    %Kinemat.Quaternion{w: ~a(0.7071067811865476)r, x: 0.7071067811865475, y: 0.0, z: 0.0}
+    %Quaternion{w: ~a(0.7071067811865476)r, x: 0.7071067811865475, y: 0.0, z: 0.0}
   """
   @spec to_quaternion(RotationMatrix.t()) :: Quaternion.t()
   def to_quaternion(%RotationMatrix{matrix: matrix}) do
@@ -38,14 +37,13 @@ defimpl Kinemat.Orientation, for: Kinemat.RotationMatrix do
 
   ## Examples
 
-    iex> use Kinemat
-    ...> {0, 1, 0, 1, 0, 0, 0, 0, -1}
+    iex> {0, 1, 0, 1, 0, 0, 0, 0, -1}
     ...> |> RotationMatrix.init()
     ...> |> Orientation.to_euler()
-    %Kinemat.Euler{representation: :xyz,
-                   x: ~a(3.141592653589793)r,
-                   y: ~a(0),
-                   z: ~a(-1.5707963267948966)r}
+    %Euler{representation: :xyz,
+           x: ~a(3.141592653589793)r,
+           y: ~a(0),
+           z: ~a(-1.5707963267948966)r}
   """
   @spec to_euler(RotationMatrix.t()) :: Euler.t()
   def to_euler(orientation),

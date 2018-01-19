@@ -1,5 +1,6 @@
 defmodule Kinemat.Orientation.RotationMatrixTest do
   use ExUnit.Case
   use Kinemat
-  doctest Kinemat.Orientation.Kinemat.RotationMatrix
+  use Kinemat.Orientations
+  doctest Kinemat.Orientation.Kinemat.Orientations.RotationMatrix
 end

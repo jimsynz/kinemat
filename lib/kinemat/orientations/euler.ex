@@ -1,4 +1,4 @@
-defmodule Kinemat.Euler do
+defmodule Kinemat.Orientations.Euler do
   alias __MODULE__
   defstruct ~w(representation x y z)a
 
@@ -27,10 +27,10 @@ defmodule Kinemat.Euler do
   ## Examples:
 
       iex> Euler.init(:xyz, ~a(10)d, ~a(20)d, ~a(30)d)
-      %Kinemat.Euler{representation: :xyz,
-                     x: ~a(10)d,
-                     y: ~a(20)d,
-                     z: ~a(30)d}
+      %Euler{representation: :xyz,
+             x: ~a(10)d,
+             y: ~a(20)d,
+             z: ~a(30)d}
   """
   @spec init(valid_representation, Angle.t(), Angle.t(), Angle.t()) :: t
   def init(representation, %Angle{} = x, %Angle{} = y, %Angle{} = z)

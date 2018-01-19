@@ -1,5 +1,6 @@
-defimpl Inspect, for: Kinemat.Quaternion do
-  alias Kinemat.{Quaternion, Orientation}
+defimpl Inspect, for: Kinemat.Orientations.Quaternion do
+  alias Kinemat.Orientation
+  use Kinemat.Orientations
   import Inspect.Algebra
 
   @spec inspect(Orientation.t(), any) :: String.t()

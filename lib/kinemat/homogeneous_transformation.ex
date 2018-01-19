@@ -1,5 +1,6 @@
 defmodule Kinemat.HomogeneousTransformation do
   use Kinemat
+  use Kinemat.Orientations
 
   @moduledoc """
   Converts a Frame into a 4x4 matrix of it's homogeneous transformation.

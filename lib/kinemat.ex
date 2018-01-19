@@ -4,16 +4,11 @@ defmodule Kinemat do
       alias Kinemat.{
         Point,
         Orientation,
-        Euler,
-        RotationMatrix,
-        Quaternion,
-        Sperical,
-        # Joint, Point, Prismatic, Radians, Revolute, Spherical,
         Frame
       }
 
       import Angle.Sigil
-      # import Kinemet.Sigil
+      # import Kinemat.Sigil
     end
   end
 
@@ -26,6 +21,7 @@ defmodule Kinemat do
   ## Examples
 
       iex> use Kinemat
+      ...> use Kinemat.Orientations
       ...> Euler.init(:xyz, ~a(0), ~a(0), ~a(0))
       #Kinemat.Orientation<[euler: :xyz, x: #Angle<0>, y: #Angle<0>, z: #Angle<0>]>
   """

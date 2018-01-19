@@ -1,8 +1,9 @@
 defmodule Kinemat.Orientation.EulerToRotationMatrixTest do
   use ExUnit.Case
   use Kinemat
-  import Kinemat.Euler.ToRotationMatrix, only: [to_rotation_matrix: 1]
-  doctest Kinemat.Euler.ToRotationMatrix
+  use Kinemat.Orientations
+  import Kinemat.Orientations.Euler.ToRotationMatrix, only: [to_rotation_matrix: 1]
+  doctest Kinemat.Orientations.Euler.ToRotationMatrix
 
   @deg_30 ~a(30)d
   @deg_20 ~a(20)d

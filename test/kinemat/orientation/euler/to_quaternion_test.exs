@@ -1,9 +1,10 @@
 defmodule Kinemat.Orientation.EulerToQuaternionTest do
   use ExUnit.Case
   use Kinemat
+  use Kinemat.Orientations
   alias Angle.Radian
-  import Kinemat.Euler.ToQuaternion, only: [to_quaternion: 1]
-  doctest Kinemat.Euler.ToQuaternion
+  import Kinemat.Orientations.Euler.ToQuaternion, only: [to_quaternion: 1]
+  doctest Kinemat.Orientations.Euler.ToQuaternion
 
   @deg_30 ~a(30)d
   @deg_20 ~a(20)d

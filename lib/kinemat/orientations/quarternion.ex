@@ -1,5 +1,5 @@
-defmodule Kinemat.Quaternion do
-  alias Kinemat.Quaternion
+defmodule Kinemat.Orientations.Quaternion do
+  alias __MODULE__
   defstruct ~w(w x y z)a
 
   @moduledoc """
@@ -17,7 +17,7 @@ defmodule Kinemat.Quaternion do
       Initialising with an Angle.
 
       iex> Quaternion.init(~a(90)d, 10, 20, 30)
-      %Kinemat.Quaternion{w: ~a(90)d, x: 10, y: 20, z: 30}
+      %Quaternion{w: ~a(90)d, x: 10, y: 20, z: 30}
   """
   @spec init(Angle.t(), number, number, number) :: t
   def init(%Angle{} = w, x, y, z), do: %Quaternion{w: w, x: x, y: y, z: z}

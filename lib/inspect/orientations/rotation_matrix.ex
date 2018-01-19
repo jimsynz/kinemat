@@ -1,5 +1,6 @@
-defimpl Inspect, for: Kinemat.RotationMatrix do
-  alias Kinemat.{RotationMatrix, Orientation}
+defimpl Inspect, for: Kinemat.Orientations.RotationMatrix do
+  alias Kinemat.Orientation
+  use Kinemat.Orientations
   import Inspect.Algebra
 
   @spec inspect(Orientation.t(), any) :: String.t()

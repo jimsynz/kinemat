@@ -1,5 +1,6 @@
 defmodule Kinemat.Orientation.QuaternionTest do
   use ExUnit.Case
   use Kinemat
-  doctest Kinemat.Orientation.Kinemat.Quaternion
+  use Kinemat.Orientations
+  doctest Kinemat.Orientation.Kinemat.Orientations.Quaternion
 end

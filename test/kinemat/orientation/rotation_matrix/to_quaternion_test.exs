@@ -1,7 +1,8 @@
 defmodule Kinemat.RotationMatrixToQuaternionTest do
   use ExUnit.Case
   use Kinemat
-  doctest Kinemat.RotationMatrix.ToQuaternion
+  use Kinemat.Orientations
+  doctest Kinemat.Orientations.RotationMatrix.ToQuaternion
 
   @rotation RotationMatrix.init({0, 1, 0, 1, 0, 0, 0, 0, -1})
 

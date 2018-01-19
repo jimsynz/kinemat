@@ -1,5 +1,6 @@
 defmodule Kinemat.Orientation.EulerTest do
   use ExUnit.Case
   use Kinemat
-  doctest Kinemat.Orientation.Kinemat.Euler
+  use Kinemat.Orientations
+  doctest Kinemat.Orientation.Kinemat.Orientations.Euler
 end

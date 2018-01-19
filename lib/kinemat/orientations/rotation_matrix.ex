@@ -1,4 +1,4 @@
-defmodule Kinemat.RotationMatrix do
+defmodule Kinemat.Orientations.RotationMatrix do
   alias __MODULE__
   defstruct [:matrix]
 
@@ -16,9 +16,8 @@ defmodule Kinemat.RotationMatrix do
 
   ## Examples
 
-      iex> use Kinemat
-      ...> RotationMatrix.init({1, 0, 0, 0, 1, 0, 0, 0, 1})
-      %Kinemat.RotationMatrix{matrix: {1, 0, 0, 0, 1, 0, 0, 0, 1}}
+      iex> RotationMatrix.init({1, 0, 0, 0, 1, 0, 0, 0, 1})
+      %RotationMatrix{matrix: {1, 0, 0, 0, 1, 0, 0, 0, 1}}
   """
   @spec init(matrix3) :: t
   def init({n0, n1, n2, n3, n4, n5, n6, n7, n8} = matrix)

@@ -1,5 +1,6 @@
-defmodule Kinemat.Euler.ToQuaternion do
+defmodule Kinemat.Orientations.Euler.ToQuaternion do
   use Kinemat
+  use Kinemat.Orientations
   import :math, only: [cos: 1, sin: 1]
   alias Angle.Radian
 

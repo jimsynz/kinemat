@@ -1,5 +1,6 @@
-defmodule Kinemat.RotationMatrix.ToQuaternion do
+defmodule Kinemat.Orientations.RotationMatrix.ToQuaternion do
   use Kinemat
+  use Kinemat.Orientations
   import :math, only: [sqrt: 1]
   alias Angle.Radian
 

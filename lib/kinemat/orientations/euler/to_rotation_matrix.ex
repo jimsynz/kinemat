@@ -1,5 +1,6 @@
-defmodule Kinemat.Euler.ToRotationMatrix do
+defmodule Kinemat.Orientations.Euler.ToRotationMatrix do
   use Kinemat
+  use Kinemat.Orientations
   import Kinemat.Trig, only: [cos: 1, sin: 1]
 
   @moduledoc """
