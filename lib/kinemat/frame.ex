@@ -22,6 +22,16 @@ defmodule Kinemat.Frame do
   end
 
   @doc """
+  Initialize a zero-based reference frame.
+
+  Generates a reference frame with zero coordiante or orientation offset.
+  """
+  @spec zero() :: t
+  def zero do
+    init(Cartesian.init(0, 0, 0), Euler.init(:xyz, ~a(0), ~a(0), ~a(0)))
+  end
+
+  @doc """
   Returns the coordinate (translation) portion of the frame.
 
   ## Examples
