@@ -73,5 +73,5 @@ defmodule Kinemat.Joints.Cylindrical do
 end
 
 defimpl Kinemat.Joint, for: Kinemat.Joints.Cylindrical do
-  def degrees_of_freedom(_join), do: 2
+  def degrees_of_freedom(_joint), do: 2
 end
