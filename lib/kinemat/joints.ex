@@ -7,7 +7,7 @@ defmodule Kinemat.Joints do
 
   defmacro __using__(_opts) do
     quote do
-      alias Kinemat.Joints.{Revolute, Prismatic, Cylindrical}
+      alias Kinemat.Joints.{Cylindrical, Prismatic, Revolute}
     end
   end
 end

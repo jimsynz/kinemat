@@ -2,9 +2,9 @@ defmodule Kinemat do
   defmacro __using__(_opts) do
     quote do
       alias Kinemat.{
-        Point,
+        Frame,
         Orientation,
-        Frame
+        Point
       }
 
       import Angle.Sigil
