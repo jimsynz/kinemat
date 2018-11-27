@@ -16,4 +16,10 @@ defprotocol Kinemat.Vector do
   """
   @spec truncate_n(t(), non_neg_integer) :: {:ok, t()} | {:error, term}
   def truncate_n(_vector, _n)
+
+  @doc """
+  Add two vectors together.
+  """
+  @spec add(t, t) :: {:ok, t} | {:error, term}
+  def add(_lhs, _rhs)
 end

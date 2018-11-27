@@ -1,5 +1,5 @@
 defmodule KinematMatrixNifTest do
   use ExUnit.Case
-  alias Kinemat.MatrixNif
+  import Kinemat.MatrixNif
   doctest Kinemat.MatrixNif
 end

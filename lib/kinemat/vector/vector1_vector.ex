@@ -1,5 +1,7 @@
 defimpl Kinemat.Vector, for: Kinemat.Vector.Vector1 do
   alias Kinemat.Vector.Vector1
+  alias Kinemat.MatrixNif
+  alias Kinemat.MatrixNif.{IntoTuple, FromTuple}
 
   @moduledoc false
 
@@ -26,4 +28,23 @@ defimpl Kinemat.Vector, for: Kinemat.Vector.Vector1 do
   """
   @spec truncate_n(Vector1.t(), number) :: {:error, binary}
   def truncate_n(_vector, _n), do: {:error, "Cannot truncate Vector1"}
+
+  @doc """
+  Add two `lhs` and `rhs`.
+
+  ## Example
+
+      iex> lhs = Vector1.init(1885)
+      ...> rhs = Vector1.init(1995)
+      ...> Vector.add(lhs, rhs)
+      {:ok, %Vector1{x: 3880.0}}
+  """
+  @spec add(Vector1.t(), Vector1.t()) :: {:ok, Vector1.t()} | {:error, binary}
+  def add(lhs, rhs) do
+    with {:vector1, _x} = lhs <- IntoTuple.into(lhs),
+         {:vector1, _y} = rhs <- IntoTuple.into(rhs),
+         {:ok, vec} <- MatrixNif.vector1_add(lhs, rhs),
+         {:ok, vec} <- FromTuple.from(vec),
+         do: {:ok, vec}
+  end
 end
