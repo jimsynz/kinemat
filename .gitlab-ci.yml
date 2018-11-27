@@ -1,4 +1,4 @@
-image: elixir:latest
+image: alinpopa/rustler:latest
 
 variables:
   MIX_ENV: "test"
