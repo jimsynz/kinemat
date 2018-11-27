@@ -29,4 +29,26 @@ defmodule Kinemat.Vector.Vector2 do
   """
   @spec zero() :: Vector2.t()
   def zero, do: init(0, 0)
+
+  @doc """
+  Unit vector in the `x` direction.
+
+  ## Example
+
+      iex> Vector2.unit_x()
+      %Vector2{x: 1.0, y: 0.0}
+  """
+  @spec unit_x() :: Vector2.t()
+  def unit_x, do: init(1.0, 0.0)
+
+  @doc """
+  Unit vector in the `y` direction.
+
+  ## Example
+
+      iex> Vector2.unit_y()
+      %Vector2{x: 0.0, y: 1.0}
+  """
+  @spec unit_y() :: Vector2.t()
+  def unit_y, do: init(0.0, 1.0)
 end
