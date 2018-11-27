@@ -1,4 +1,4 @@
-image: alinpopa/rustler:latest
+image: registry.gitlab.com/jimsy/rustler_container
 
 variables:
   MIX_ENV: "test"
