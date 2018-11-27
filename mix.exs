@@ -14,7 +14,9 @@ defmodule Kinemat.Mixfile do
       start_permanent: Mix.env() == :prod,
       package: package(),
       deps: deps(),
-      description: @description
+      description: @description,
+      compilers: [:rustler] ++ Mix.compilers(),
+      rustler_crates: rustler_crates()
     ]
   end
 
@@ -35,6 +37,15 @@ defmodule Kinemat.Mixfile do
     ]
   end
 
+  defp rustler_crates do
+    [
+      kinemat_matrix_nif: [
+        path: "native/kinemat_matrix_nif",
+        mode: if(Mix.env() == :prod, do: :release, else: :debug)
+      ]
+    ]
+  end
+
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
@@ -43,7 +54,8 @@ defmodule Kinemat.Mixfile do
       {:credo, "~> 0.6", only: ~w(dev test)a, runtime: false},
       {:dialyxir, "~> 0.5", only: ~w(dev test)a, runtime: false},
       {:graphmath, "~> 1.0"},
-      {:angle, ">= 0.2.1"}
+      {:angle, ">= 0.2.1"},
+      {:rustler, "~> 0.18.0"}
     ]
   end
 end
