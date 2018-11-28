@@ -21,6 +21,17 @@ defmodule Kinemat.Matrix.Matrix2 do
   def init(x, y), do: %Matrix2{x: x, y: y}
 
   @doc """
+  Initialize a `Matrix2` from four numbers.
+
+  ## Example
+
+      iex> Matrix2.init(1885, 1955, 1985, 2015)
+      %Matrix2{x: %Vector2{x: 1885, y: 1955}, y: %Vector2{x: 1985, y: 2015}}
+  """
+  @spec init(number, number, number, number) :: Matrix2.t()
+  def init(x, y, z, w), do: %Matrix2{x: Vector2.init(x, y), y: Vector2.init(z, w)}
+
+  @doc """
   Initialize a `Matrix2` from zeroed `Vector2`s.
 
   ## Example

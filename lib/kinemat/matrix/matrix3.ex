@@ -22,6 +22,23 @@ defmodule Kinemat.Matrix.Matrix3 do
   def init(x, y, z), do: %Matrix3{x: x, y: y, z: z}
 
   @doc """
+  Initialize a `Matrix3` from nine values.
+
+  ## Example
+
+      iex> Matrix3.init(1, 2, 3, 4, 5, 6, 7, 8, 9)
+      %Matrix3{x: %Vector3{x: 1, y: 2, z: 3}, y: %Vector3{x: 4, y: 5, z: 6}, z: %Vector3{x: 7, y: 8, z: 9}}
+  """
+  @spec init(number, number, number, number, number, number, number, number, number) ::
+          Matrix3.t()
+  def init(xx, xy, xz, yx, yy, yz, zx, zy, zz),
+    do: %Matrix3{
+      x: Vector3.init(xx, xy, xz),
+      y: Vector3.init(yx, yy, yz),
+      z: Vector3.init(zx, zy, zz)
+    }
+
+  @doc """
   Initialize a `Matrix3` from three zeroed `Vector3`s.
 
   ## Example

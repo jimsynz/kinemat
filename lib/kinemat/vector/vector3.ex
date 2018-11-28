@@ -1,8 +1,8 @@
 defmodule Kinemat.Vector.Vector3 do
   alias __MODULE__
-  defstruct x: 0, y: 0, z: 0
+  defstruct x: 0.0, y: 0.0, z: 0.0
 
-  @type t :: %Vector3{x: number, y: number, z: number}
+  @type t :: %Vector3{x: float, y: float, z: float}
 
   @moduledoc """
   A 3-dimensional vector.

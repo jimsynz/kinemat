@@ -55,7 +55,8 @@ defmodule Kinemat.Mixfile do
       {:dialyxir, "~> 0.5", only: ~w(dev test)a, runtime: false},
       {:graphmath, "~> 1.0"},
       {:angle, ">= 0.2.1"},
-      {:rustler, "~> 0.18.0"}
+      {:rustler, "~> 0.18.0"},
+      {:benchee, ">= 0.0.0"}
     ]
   end
 end
