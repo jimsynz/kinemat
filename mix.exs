@@ -40,9 +40,8 @@ defmodule Kinemat.Mixfile do
     [
       {:ex_doc, ">= 0.0.0", only: :dev},
       {:earmark, ">= 0.0.0", only: :dev},
-      {:credo, "~> 0.6", only: ~w(dev test)a, runtime: false},
-      {:dialyxir, "~> 0.5", only: ~w(dev test)a, runtime: false},
-      {:graphmath, "~> 1.0"},
+      {:credo, "~> 1.4", only: ~w(dev test)a, runtime: false},
+      {:graphmath, "~> 2.0"},
       {:angle, ">= 0.2.1"}
     ]
   end
