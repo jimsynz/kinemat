@@ -29,7 +29,7 @@ defimpl Kinemat.Orientation, for: Kinemat.Orientations.Quaternion do
 
     r
     |> Quatern.create(x, y, z)
-    |> Quatern.to_rotation_matrix()
+    |> Quatern.to_rotation_matrix_33()
     |> RotationMatrix.init()
   end
 
