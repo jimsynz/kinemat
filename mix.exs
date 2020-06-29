@@ -38,8 +38,8 @@ defmodule Kinemat.Mixfile do
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
-      {:ex_doc, ">= 0.0.0", only: :dev},
-      {:earmark, ">= 0.0.0", only: :dev},
+      {:ex_doc, ">= 0.0.0", only: ~w(dev test)a},
+      {:earmark, ">= 0.0.0", only: ~w(dev test)a},
       {:credo, "~> 1.4", only: ~w(dev test)a, runtime: false},
       {:graphmath, "~> 2.0"},
       {:angle, ">= 0.2.1"}
