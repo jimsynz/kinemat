@@ -14,7 +14,8 @@ defmodule Kinemat.Mixfile do
       start_permanent: Mix.env() == :prod,
       package: package(),
       deps: deps(),
-      description: @description
+      description: @description,
+      elixirc_paths: elixirc_paths(Mix.env())
     ]
   end
 
@@ -35,14 +36,18 @@ defmodule Kinemat.Mixfile do
     ]
   end
 
+  defp elixirc_paths(:test), do: ["lib", "test/support"]
+  defp elixirc_paths(_), do: ["lib"]
+
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
+      {:angle, ">= 0.2.1"},
       {:ex_doc, ">= 0.0.0", only: ~w(dev test)a},
       {:earmark, ">= 0.0.0", only: ~w(dev test)a},
       {:credo, "~> 1.4", only: ~w(dev test)a, runtime: false},
       {:graphmath, "~> 2.0"},
-      {:angle, ">= 0.2.1"}
+      {:uuid, "~> 1.1"}
     ]
   end
 end
