@@ -63,14 +63,14 @@ defmodule Kinemat.URDF.Save do
   defp to_tag(%Robot.Link{name: name, visual: visual}),
     do: {:link, [name: name], [to_tag(visual)]}
 
-  defp to_tag(%Robot.Visual{geometries: geometries, origin: origin, material_name: material_name}) do
-    geometries =
-      geometries
-      |> Enum.map(&to_tag(&1))
+  defp to_tag(%Robot.Visual{geometry: geometry, origin: origin, material_name: material_name}) do
+    geometry =
+      geometry
+      |> to_tag()
 
     contents =
-      if Enum.any?(geometries),
-        do: [{:geometry, [], geometries}],
+      if geometry,
+        do: [{:geometry, [], [geometry]}],
         else: []
 
     contents =

@@ -16,7 +16,7 @@ defmodule Kinemat.URDF.LoadTest do
       assert robot.name == "myfirst"
       assert [link] = robot.links
       assert link.name == "base_link"
-      assert [shape] = link.visual.geometries
+      assert shape = link.visual.geometry
       assert shape.__struct__ == Geometry.Cylinder
       assert shape.length == 0.6
       assert shape.radius == 0.2
@@ -28,7 +28,7 @@ defmodule Kinemat.URDF.LoadTest do
       assert robot.name == "multipleshapes"
       assert [link0, link1] = robot.links
       assert link0.name == "right_leg"
-      assert [shape] = link0.visual.geometries
+      assert shape = link0.visual.geometry
       assert shape.__struct__ == Geometry.Box
       assert shape.x == 0.6
       assert shape.y == 0.1
@@ -90,23 +90,54 @@ defmodule Kinemat.URDF.LoadTest do
     {:ok, robot} = load(fixture_path("urdf/visual.urdf"))
 
     assert {:ok, link} = Robot.get_link(robot, "left_gripper")
-    assert [mesh] = link.visual.geometries
+    assert mesh = link.visual.geometry
     assert mesh.filename == "package://urdf_tutorial/meshes/l_finger.dae"
 
     assert {:ok, link} = Robot.get_link(robot, "left_tip")
-    assert [mesh] = link.visual.geometries
+    assert mesh = link.visual.geometry
     assert mesh.filename == "package://urdf_tutorial/meshes/l_finger_tip.dae"
 
     assert {:ok, link} = Robot.get_link(robot, "right_gripper")
-    assert [mesh] = link.visual.geometries
+    assert mesh = link.visual.geometry
     assert mesh.filename == "package://urdf_tutorial/meshes/l_finger.dae"
 
     assert {:ok, link} = Robot.get_link(robot, "right_tip")
-    assert [mesh] = link.visual.geometries
+    assert mesh = link.visual.geometry
     assert mesh.filename == "package://urdf_tutorial/meshes/l_finger_tip.dae"
 
     assert {:ok, link} = Robot.get_link(robot, "head")
-    assert [sphere] = link.visual.geometries
+    assert sphere = link.visual.geometry
     assert sphere.radius == 0.2
+  end
+
+  test "it parses `flexible.urdf`" do
+    {:ok, robot} = load(fixture_path("urdf/flexible.urdf"))
+
+    assert {:ok, joint} = Robot.get_joint(robot, "right_front_wheel_joint")
+    assert orientation = joint.axis.orientation
+    assert Euler.x(orientation) == ~a(0)
+    assert Euler.y(orientation) == ~a(0)
+    assert Euler.z(orientation) == ~a(0)
+
+    assert translation = joint.axis.point
+    assert Cartesian.x(translation) == 0
+    assert Cartesian.y(translation) == 1.0
+    assert Cartesian.z(translation) == 0
+
+    assert {:ok, joint} = Robot.get_joint(robot, "gripper_extension")
+    assert joint.limit.effort == 1000.0
+    assert joint.limit.lower == -0.38
+    assert joint.limit.upper == 0
+    assert joint.limit.velocity == 0.5
+  end
+
+  test "it parses `physics.urdf`" do
+    {:ok, robot} = load(fixture_path("urdf/physics.urdf"))
+
+    assert {:ok, link} = Robot.get_link(robot, "base_link")
+    assert %Geometry.Cylinder{length: 0.6, radius: 0.2} = link.collision.geometry
+
+    assert link.inertia.mass == 10
+    assert {1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0} = link.inertia.matrix.matrix
   end
 end

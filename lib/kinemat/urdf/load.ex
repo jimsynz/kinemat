@@ -38,15 +38,8 @@ defmodule Kinemat.URDF.Load do
     with {:ok, name} <- get_attribute_value(node, :name),
          link <- Robot.Link.init(name),
          {:ok, children} <- get_children(node),
-         {:ok, link} <-
-           Enum.reduce_while(children, link, fn node, link ->
-             case parse(node, link) do
-               {:ok, link} -> {:cont, {:ok, link}}
-               {:error, reason} -> {:halt, {:error, reason}}
-             end
-           end) do
-      {:ok, Robot.add_link(robot, link)}
-    end
+         {:ok, link} <- reduce_oks(children, link, &parse(&1, &2)),
+         do: {:ok, Robot.add_link(robot, link)}
   end
 
   defp parse(:joint, node, %Robot{} = robot) do
@@ -54,9 +47,8 @@ defmodule Kinemat.URDF.Load do
          {:ok, type} <- get_attribute_value(node, :type),
          joint <- Robot.Joint.init(name, type),
          {:ok, children} <- get_children(node),
-         {:ok, joint} <- reduce_oks(children, joint, &parse(&1, &2)) do
-      {:ok, Robot.add_joint(robot, joint)}
-    end
+         {:ok, joint} <- reduce_oks(children, joint, &parse(&1, &2)),
+         do: {:ok, Robot.add_joint(robot, joint)}
   end
 
   defp parse(:material, node, %Robot{} = robot) do
@@ -73,52 +65,45 @@ defmodule Kinemat.URDF.Load do
   end
 
   defp parse(:parent, node, %Robot.Joint{} = joint) do
-    with {:ok, name} <- get_attribute_value(node, :link) do
-      {:ok, %{joint | parent_name: name}}
-    end
+    with {:ok, name} <- get_attribute_value(node, :link),
+         do: {:ok, Robot.Joint.parent_name(joint, name)}
   end
 
   defp parse(:child, node, %Robot.Joint{} = joint) do
-    with {:ok, name} <- get_attribute_value(node, :link) do
-      {:ok, %{joint | child_name: name}}
-    end
+    with {:ok, name} <- get_attribute_value(node, :link),
+         do: {:ok, Robot.Joint.child_name(joint, name)}
   end
 
   defp parse(:visual, node, %Robot.Link{} = link) do
     with {:ok, children} <- get_children(node),
          visual <- Robot.Visual.init(),
-         {:ok, visual} <- reduce_oks(children, visual, &parse(&1, &2)) do
-      {:ok, Robot.Link.visual(link, visual)}
-    end
+         {:ok, visual} <- reduce_oks(children, visual, &parse(&1, &2)),
+         do: {:ok, Robot.Link.visual(link, visual)}
   end
 
-  defp parse(:geometry, node, %Robot.Visual{} = visual) do
+  defp parse(:geometry, node, geometric) do
     with {:ok, children} <- get_children(node),
-         {:ok, geometries} <- reduce_oks(children, [], &parse(&1, &2)),
-         do: {:ok, Robot.Visual.geometries(visual, geometries)}
+         {:ok, geometric} <- reduce_oks(children, geometric, &parse(&1, &2)),
+         do: {:ok, geometric}
   end
 
-  defp parse(:cylinder, node, geometries) when is_list(geometries) do
+  defp parse(:cylinder, node, geometric) do
     with [length] <- extract_floats(node, :length, [0]),
          [radius] <- extract_floats(node, :radius, [0]),
          cylinder <- Geometry.Cylinder.init(length, radius),
-         {:ok, children} <- get_children(node),
-         {:ok, cylinder} <- reduce_oks(children, cylinder, &parse(&1, &2)),
-         do: {:ok, [cylinder | geometries]}
+         do: {:ok, Robot.Geometric.set(geometric, cylinder)}
   end
 
-  defp parse(:box, node, geometries) when is_list(geometries) do
+  defp parse(:box, node, geometric) do
     with [x, y, z] <- extract_floats(node, :size, [0, 0, 0]),
          box <- Geometry.Box.init(x, y, z),
-         {:ok, children} <- get_children(node),
-         {:ok, box} <- reduce_oks(children, box, &parse(&1, &2)),
-         do: {:ok, [box | geometries]}
+         do: {:ok, Robot.Geometric.set(geometric, box)}
   end
 
-  defp parse(:sphere, node, geometries) when is_list(geometries) do
+  defp parse(:sphere, node, geometric) do
     with [radius] <- extract_floats(node, :radius, [0]),
          sphere <- Geometry.Sphere.init(radius),
-         do: {:ok, [sphere | geometries]}
+         do: {:ok, Robot.Geometric.set(geometric, sphere)}
   end
 
   defp parse(:material, node, %Robot.Visual{} = visual) do
@@ -126,7 +111,7 @@ defmodule Kinemat.URDF.Load do
          do: {:ok, Robot.Visual.material_name(visual, name)}
   end
 
-  defp parse(:origin, node, parent) do
+  defp parse(:origin, node, orientable) do
     [roll, pitch, yaw] =
       node
       |> extract_floats(:rpy, [0, 0, 0])
@@ -138,15 +123,68 @@ defmodule Kinemat.URDF.Load do
     translation = Coordinates.Cartesian.init(x, y, z)
     frame = Frame.init(translation, orientation)
 
-    case parent do
-      %Robot.Joint{} -> {:ok, Robot.Joint.origin(parent, frame)}
-      %Robot.Visual{} -> {:ok, Robot.Visual.origin(parent, frame)}
-    end
+    {:ok, Robot.Orientable.set(orientable, frame)}
   end
 
-  defp parse(:mesh, node, parent) do
+  defp parse(:mesh, node, geometric) do
     with {:ok, filename} <- get_attribute_value(node, :filename),
-         do: {:ok, [Geometry.Mesh.init(filename) | parent]}
+         mesh <- Geometry.Mesh.init(filename),
+         do: {:ok, Robot.Geometric.set(geometric, mesh)}
+  end
+
+  defp parse(:axis, node, %Robot.Joint{} = joint) do
+    [roll, pitch, yaw] =
+      node
+      |> extract_floats(:rpy, [0, 0, 0])
+      |> Enum.map(&Angle.Radian.init(&1))
+
+    [x, y, z] = extract_floats(node, :xyz, [0, 0, 0])
+
+    orientation = Orientations.Euler.init(:xyz, roll, pitch, yaw)
+    translation = Coordinates.Cartesian.init(x, y, z)
+    frame = Frame.init(translation, orientation)
+    {:ok, Robot.Joint.axis(joint, frame)}
+  end
+
+  defp parse(:limit, node, %Robot.Joint{} = joint) do
+    [effort] = extract_floats(node, :effort, [0])
+    [lower] = extract_floats(node, :lower, [0])
+    [upper] = extract_floats(node, :upper, [0])
+    [velocity] = extract_floats(node, :velocity, [0])
+
+    limit = Robot.Limit.init(effort: effort, lower: lower, upper: upper, velocity: velocity)
+    {:ok, Robot.Joint.limit(joint, limit)}
+  end
+
+  defp parse(:collision, node, %Robot.Link{} = link) do
+    with {:ok, children} <- get_children(node),
+         collision <- Robot.Collision.init(),
+         {:ok, collision} <- reduce_oks(children, collision, &parse(&1, &2)),
+         do: {:ok, Robot.Link.collision(link, collision)}
+  end
+
+  defp parse(:inertial, node, %Robot.Link{} = link) do
+    with inertia <- Robot.Inertia.init(),
+         {:ok, children} <- get_children(node),
+         {:ok, inertia} <- reduce_oks(children, inertia, &parse(&1, &2)),
+         do: {:ok, Robot.Link.inertia(link, inertia)}
+  end
+
+  defp parse(:mass, node, %Robot.Inertia{} = inertia) do
+    [mass] = extract_floats(node, :value, [0])
+    {:ok, Robot.Inertia.mass(inertia, mass)}
+  end
+
+  defp parse(:inertia, node, %Robot.Inertia{} = inertia) do
+    [ixx] = extract_floats(node, :ixx, [0])
+    [ixy] = extract_floats(node, :ixy, [0])
+    [ixz] = extract_floats(node, :ixz, [0])
+    [iyy] = extract_floats(node, :iyy, [0])
+    [iyz] = extract_floats(node, :iyz, [0])
+    [izz] = extract_floats(node, :izz, [0])
+
+    matrix = Orientations.RotationMatrix.init({ixx, ixy, ixz, ixy, iyy, iyz, ixz, iyz, izz})
+    {:ok, Robot.Inertia.matrix(inertia, matrix)}
   end
 
   defp extract_floats(node, attribute_name, default_value) do
