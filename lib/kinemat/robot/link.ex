@@ -1,5 +1,5 @@
 defmodule Kinemat.Robot.Link do
-  defstruct name: nil, visual: nil, origin: nil, collision: nil, inertia: nil
+  defstruct name: nil, visual: nil, collision: nil, inertia: nil
   alias Kinemat.{Robot.Collision, Robot.Inertia, Robot.Link, Robot.Visual}
 
   @moduledoc """

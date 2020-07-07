@@ -1,6 +1,6 @@
 defmodule Kinemat.Robot.Inertia do
   defstruct origin: nil, mass: nil, matrix: nil
-  alias Kinemat.{Frame, Robot.Inertia, Robot.Orientable, Orientations.RotationMatrix}
+  alias Kinemat.{Frame, Orientations.RotationMatrix, Robot.Inertia, Robot.Orientable}
 
   @moduledoc """
   A container for the inertial properties of a link.
@@ -15,8 +15,8 @@ defmodule Kinemat.Robot.Inertia do
   @doc """
   Initialise empty inertia container..
   """
-  @spec init() :: Inertia.t()
-  def init(), do: %Inertia{}
+  @spec init :: Inertia.t()
+  def init, do: %Inertia{}
 
   @doc """
   Set the mass component of the inertial container.

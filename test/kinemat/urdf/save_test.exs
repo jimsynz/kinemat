@@ -4,7 +4,7 @@ defmodule Kinemat.URDF.SaveTest do
   import KinematTest.FileHelpers
 
   describe "save/2" do
-    test "it correctly serialises the Robot" do
+    test "it correctly serialises the \"visual\" Robot" do
       {:ok, robot} = load(fixture_path("urdf/visual.urdf"))
 
       with_test_directory(fn dir ->
@@ -13,6 +13,18 @@ defmodule Kinemat.URDF.SaveTest do
 
         assert {:ok, xml} = File.read(path)
         assert Regex.match?(~r/<robot name="visual"/, xml)
+      end)
+    end
+
+    test "it correctly serialises the \"physics\" robot" do
+      {:ok, robot} = load(fixture_path("urdf/physics.urdf"))
+
+      with_test_directory(fn dir ->
+        path = Path.join(dir, "physics.urdf")
+        assert :ok = save(robot, path)
+
+        assert {:ok, xml} = File.read(path)
+        assert Regex.match?(~r/<robot name="physics"/, xml)
       end)
     end
   end

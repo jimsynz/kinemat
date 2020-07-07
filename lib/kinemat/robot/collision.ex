@@ -1,6 +1,6 @@
 defmodule Kinemat.Robot.Collision do
   defstruct geometry: nil, origin: nil
-  alias Kinemat.{Robot.Collision, Frame, Robot.Geometric, Geometry, Robot.Orientable}
+  alias Kinemat.{Frame, Geometry, Robot.Collision, Robot.Geometric, Robot.Orientable}
 
   @moduledoc """
   A container for the collision properties of a link.

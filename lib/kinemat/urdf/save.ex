@@ -5,6 +5,7 @@ defmodule Kinemat.URDF.Save do
     Geometry,
     Orientation,
     Orientations.Euler,
+    Orientations.RotationMatrix,
     Point,
     Robot
   }
@@ -60,8 +61,16 @@ defmodule Kinemat.URDF.Save do
   defp to_tag(%Robot.Link{name: name, visual: nil}),
     do: {:link, [name: name], []}
 
-  defp to_tag(%Robot.Link{name: name, visual: visual}),
-    do: {:link, [name: name], [to_tag(visual)]}
+  defp to_tag(%Robot.Link{name: name} = link) do
+    contents =
+      link
+      |> Map.take(~w[visual collision inertia]a)
+      |> Map.values()
+      |> Enum.reject(&is_nil(&1))
+      |> Enum.map(&to_tag(&1))
+
+    {:link, [name: name], contents}
+  end
 
   defp to_tag(%Robot.Visual{geometry: geometry, origin: origin, material_name: material_name}) do
     geometry =
@@ -149,5 +158,45 @@ defmodule Kinemat.URDF.Save do
         else: contents
 
     {:joint, [name: name, type: type], contents}
+  end
+
+  defp to_tag(%Robot.Collision{geometry: geometry} = collision) do
+    geometry =
+      geometry
+      |> to_tag()
+
+    contents =
+      if geometry,
+        do: [{:geometry, [], [geometry]}],
+        else: []
+
+    contents =
+      if collision.origin,
+        do: [to_tag(collision.origin) | contents],
+        else: contents
+
+    {:collision, [], contents}
+  end
+
+  defp to_tag(%Robot.Inertia{
+         mass: mass,
+         matrix: %RotationMatrix{matrix: {xx, xy, xz, _, yy, yz, _, _, zz}},
+         origin: origin
+       }) do
+    inertia =
+      [ixx: xx, ixy: xy, ixz: xz, iyy: yy, iyz: yz, izz: zz]
+      |> Enum.map(fn {name, value} -> {name, to_string(value)} end)
+
+    contents = [
+      {:mass, [value: to_string(mass)], []},
+      {:inertia, inertia, []}
+    ]
+
+    contents =
+      if origin,
+        do: [to_tag(origin) | contents],
+        else: contents
+
+    {:inertial, [], contents}
   end
 end
