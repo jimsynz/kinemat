@@ -5,29 +5,54 @@ defmodule Kinemat.Robot.Joint do
             child_name: nil,
             origin: nil,
             axis: nil,
-            limit: nil
+            limit: nil,
+            calibration: nil,
+            dynamics: nil,
+            mimic: nil,
+            safety_controller: nil
 
-  alias Kinemat.{Frame, Robot.Joint, Robot.Limit, Robot.Orientable}
+  alias Kinemat.{
+    Frame,
+    Orientation,
+    Robot.Calibration,
+    Robot.Dynamics,
+    Robot.Joint,
+    Robot.Limit,
+    Robot.Mimic,
+    Robot.Orientable,
+    Robot.SafetyController
+  }
 
   @moduledoc """
   Represents a joint in a Robot body.
   """
 
+  @type joint_type :: :revolute | :continuous | :prismatic | :fixed | :floating | :planar
+
   @type t :: %Joint{
           name: String.t(),
-          type: String.t(),
+          type: joint_type | nil,
           parent_name: String.t() | nil,
           child_name: String.t() | nil,
-          origin: Frame | nil,
-          axis: Frame | nil,
-          limit: Limit | nil
+          origin: Frame.t() | nil,
+          axis: Orientation.t() | nil,
+          limit: Limit.t() | nil,
+          calibration: Calibration.t() | nil,
+          dynamics: Dynamics.t() | nil,
+          mimic: Mimic.t() | nil,
+          safety_controller: SafetyController.t() | nil
         }
 
   @doc """
   Initialise a new joint.
   """
   @spec init(String.t(), String.t()) :: Joint.t()
-  def init(name, type), do: %Joint{name: name, type: type}
+  def init(name, "revolute"), do: %Joint{name: name, type: :revolute}
+  def init(name, "continuous"), do: %Joint{name: name, type: :continuous}
+  def init(name, "prismatic"), do: %Joint{name: name, type: :prismatic}
+  def init(name, "fixed"), do: %Joint{name: name, type: :fixed}
+  def init(name, "floating"), do: %Joint{name: name, type: :floating}
+  def init(name, "planar"), do: %Joint{name: name, type: :planar}
 
   @doc """
   Set the name of the parent link.
@@ -44,7 +69,7 @@ defmodule Kinemat.Robot.Joint do
   @doc """
   Set the reference frame of the joint axis.
   """
-  @spec axis(Joint.t(), Frame.t()) :: Joint.t()
+  @spec axis(Joint.t(), Orientation.t()) :: Joint.t()
   def axis(%Joint{} = joint, frame), do: %Joint{joint | axis: frame}
 
   @doc """
@@ -53,9 +78,43 @@ defmodule Kinemat.Robot.Joint do
   @spec limit(Joint.t(), Limit.t()) :: Joint.t()
   def limit(%Joint{} = joint, %Limit{} = limit), do: %Joint{joint | limit: limit}
 
+  @doc """
+  Set the calibration of the joint.
+  """
+  @spec calibration(Joint.t(), Calibration.t()) :: Joint.t()
+  def calibration(%Joint{} = joint, %Calibration{} = calibration),
+    do: %Joint{joint | calibration: calibration}
+
+  @doc """
+  Set the dynamics of the joint.
+  """
+  @spec dynamics(Joint.t(), Dynamics.t()) :: Joint.t()
+  def dynamics(%Joint{} = joint, %Dynamics{} = dynamics),
+    do: %Joint{joint | dynamics: dynamics}
+
+  @doc """
+  Make the joint mimic another joint.
+  """
+  @spec mimic(Joint.t(), Mimic.t()) :: Joint.t()
+  def mimic(%Joint{} = joint, %Mimic{} = mimic),
+    do: %Joint{joint | mimic: mimic}
+
+  @doc """
+  Add a safety controller to the joint.
+  """
+  @spec safety_controller(Joint.t(), SafetyController.t()) :: Joint.t()
+  def safety_controller(%Joint{} = joint, %SafetyController{} = safety_controller),
+    do: %Joint{joint | safety_controller: safety_controller}
+
   defimpl Orientable do
+    import Angle.Sigil
+    alias Kinemat.{Coordinates.Cartesian, Frame, Orientations.Euler}
+
     def set(%Joint{} = joint, %Frame{} = frame),
       do: %Joint{joint | origin: frame}
+
+    def get(%Joint{origin: nil}),
+      do: Frame.init(Cartesian.init(0, 0, 0), Euler.init(:xyz, ~a(0), ~a(0), ~a(0)))
 
     def get(%Joint{origin: origin}), do: origin
   end

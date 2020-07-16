@@ -57,6 +57,18 @@ defmodule Kinemat.URDF.XmlHelpers do
   def get_content(_node), do: {:error, "Node is not an element"}
 
   @doc """
+  Return all the text contents of the element, if any.
+  """
+  def get_text(node) when is_element(node) do
+    with contents <- xmlElement(node, :content),
+         text_nodes <- Enum.map(contents, &xmlText(&1, :value)),
+         result <- Enum.join(text_nodes, ""),
+         do: {:ok, result}
+  end
+
+  def get_text(_node), do: {:error, "Node is not an element"}
+
+  @doc """
   Returns all the child elements of an XML element.
   """
   def get_children(node) when is_element(node) do

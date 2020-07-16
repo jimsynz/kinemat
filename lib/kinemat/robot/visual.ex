@@ -1,6 +1,6 @@
 defmodule Kinemat.Robot.Visual do
-  defstruct geometry: nil, material_name: nil, origin: nil
-  alias Kinemat.{Frame, Geometry, Robot.Geometric, Robot.Orientable, Robot.Visual}
+  defstruct geometry: nil, material: nil, origin: nil
+  alias Kinemat.{Frame, Geometry, Robot.Geometric, Robot.Material, Robot.Orientable, Robot.Visual}
 
   @moduledoc """
   A container for the visual properties of a Robot description.
@@ -9,7 +9,7 @@ defmodule Kinemat.Robot.Visual do
   @type t :: %Visual{
           geometry: Geometry.t(),
           origin: Point.t() | nil,
-          material_name: String.t() | nil
+          material: Material.t() | nil
         }
 
   @doc """
@@ -26,11 +26,11 @@ defmodule Kinemat.Robot.Visual do
     do: %Visual{visual | origin: origin}
 
   @doc """
-  Set the material name of this visual geometry.
+  Set the material of this visual geometry.
   """
-  @spec material_name(Visual.t(), String.t()) :: Visual.t()
-  def material_name(%Visual{} = visual, material_name),
-    do: %Visual{visual | material_name: material_name}
+  @spec material(Visual.t(), Material.t()) :: Visual.t()
+  def material(%Visual{} = visual, %Material{} = material),
+    do: %Visual{visual | material: material}
 
   defimpl Geometric do
     def set(%Visual{} = visual, geometry),

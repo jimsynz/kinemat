@@ -1,5 +1,5 @@
 defmodule Kinemat.Geometry.Mesh do
-  defstruct filename: nil
+  defstruct filename: nil, scale: 1
   alias Kinemat.Geometry.Mesh
 
   @moduledoc """
@@ -16,4 +16,11 @@ defmodule Kinemat.Geometry.Mesh do
   """
   @spec init(Path.t()) :: Mesh.t()
   def init(filename), do: %Mesh{filename: filename}
+
+  @doc """
+  Set the scaling factor for the mesh.
+  """
+  @spec scale(Mesh.t(), number) :: Mesh.t()
+  def scale(%Mesh{} = mesh, scale) when is_number(scale),
+    do: %Mesh{mesh | scale: scale}
 end

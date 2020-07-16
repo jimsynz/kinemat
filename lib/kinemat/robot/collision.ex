@@ -1,5 +1,5 @@
 defmodule Kinemat.Robot.Collision do
-  defstruct geometry: nil, origin: nil
+  defstruct geometry: nil, origin: nil, name: nil
   alias Kinemat.{Frame, Geometry, Robot.Collision, Robot.Geometric, Robot.Orientable}
 
   @moduledoc """
@@ -8,7 +8,8 @@ defmodule Kinemat.Robot.Collision do
 
   @type t :: %Collision{
           geometry: Geometry.t() | nil,
-          origin: Frame.t() | nil
+          origin: Frame.t() | nil,
+          name: String.t() | nil
         }
 
   @doc """
@@ -16,6 +17,12 @@ defmodule Kinemat.Robot.Collision do
   """
   @spec init :: Collision.t()
   def init, do: %Collision{}
+
+  @doc """
+  Initialise an empty collision container by name.
+  """
+  @spec init(String.t()) :: Collision.t()
+  def init(name), do: %Collision{name: name}
 
   @doc """
   Set the geometry to be stored in the collision container.

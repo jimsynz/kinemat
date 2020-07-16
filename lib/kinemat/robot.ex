@@ -1,6 +1,6 @@
 defmodule Kinemat.Robot do
-  defstruct name: nil, links: [], joints: [], materials: []
-  alias Kinemat.{Robot, Robot.Joint, Robot.Link, Robot.Material}
+  defstruct name: nil, links: [], joints: [], materials: [], transmissions: []
+  alias Kinemat.{Robot, Robot.Joint, Robot.Link, Robot.Material, Robot.Transmission}
 
   @moduledoc """
   A data-structure representing a robot.
@@ -10,7 +10,8 @@ defmodule Kinemat.Robot do
           name: String.t(),
           links: [Link.t()],
           joints: [Joint.t()],
-          materials: [Material.t()]
+          materials: [Material.t()],
+          transmissions: [Transmission.t()]
         }
 
   @doc """
@@ -32,6 +33,13 @@ defmodule Kinemat.Robot do
   @spec add_joint(Robot.t(), Joint.t()) :: Robot.t()
   def add_joint(%Robot{joints: joints} = robot, %Joint{} = joint),
     do: %Robot{robot | joints: [joint | joints]}
+
+  @doc """
+  Add a new transmission to the robot.
+  """
+  @spec add_transmission(Robot.t(), Transmission.t()) :: Robot.t()
+  def add_transmission(%Robot{transmissions: transmissions} = robot, transmission),
+    do: %Robot{robot | transmissions: [transmission | transmissions]}
 
   @doc """
   Add a new material to the robot.

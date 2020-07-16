@@ -46,6 +46,9 @@ defmodule Kinemat.URDF.Save do
     {:robot, [name: name], Enum.reverse(contents)}
   end
 
+  defp to_tag(%Robot.Material{name: name, colour: nil}),
+    do: {:material, [name: name], []}
+
   defp to_tag(%Robot.Material{name: name, colour: colour}),
     do: {:material, [name: name], [to_tag(colour)]}
 
@@ -72,7 +75,7 @@ defmodule Kinemat.URDF.Save do
     {:link, [name: name], contents}
   end
 
-  defp to_tag(%Robot.Visual{geometry: geometry, origin: origin, material_name: material_name}) do
+  defp to_tag(%Robot.Visual{geometry: geometry, origin: origin, material: material}) do
     geometry =
       geometry
       |> to_tag()
@@ -88,8 +91,8 @@ defmodule Kinemat.URDF.Save do
         else: contents
 
     contents =
-      if material_name,
-        do: [{:material, [name: material_name], []} | contents],
+      if material,
+        do: [to_tag(material) | contents],
         else: contents
 
     {:visual, [], Enum.reverse(contents)}

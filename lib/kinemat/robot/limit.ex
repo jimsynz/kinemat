@@ -17,7 +17,7 @@ defmodule Kinemat.Robot.Limit do
   @type option :: {:effort | :lower | :upper | :velocity, number | nil}
 
   @doc """
-  Initialise a new effort container with the provided values.
+  Initialise a new limit container with the provided values.
   """
   @spec init(options) :: Limit.t()
   def init(options) when is_list(options) do
