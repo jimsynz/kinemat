@@ -4,6 +4,7 @@ defmodule Kinemat.Mixfile do
   @description """
   Forward and reverse kinematics for robotics and simulations.
   """
+
   @version "0.1.0"
 
   def project do
@@ -20,7 +21,7 @@ defmodule Kinemat.Mixfile do
 
   def package do
     [
-      maintainers: ["James Harton <james@automat.nz>"],
+      maintainers: ["James Harton <james@harton.nz>"],
       licenses: ["MIT"],
       links: %{
         "Source" => "https://gitlab.com/jimsy/kinemat"
@@ -38,11 +39,12 @@ defmodule Kinemat.Mixfile do
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
+      {:angle, ">= 0.2.1"},
+      {:credo, "~> 1.4", only: ~w(dev test)a, runtime: false},
       {:ex_doc, ">= 0.0.0", only: ~w(dev test)a},
       {:earmark, ">= 0.0.0", only: ~w(dev test)a},
-      {:credo, "~> 1.4", only: ~w(dev test)a, runtime: false},
-      {:graphmath, "~> 2.0"},
-      {:angle, ">= 0.2.1"}
+      {:git_ops, "~> 2.4", only: ~w[dev test]a, runtime: false},
+      {:graphmath, "~> 2.0"}
     ]
   end
 end
