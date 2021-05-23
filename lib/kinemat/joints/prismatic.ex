@@ -24,7 +24,7 @@ defmodule Kinemat.Joints.Prismatic do
   @doc """
   Initialize a new prismatic joint from a reference frame with translation limits.
   """
-  @spec init(Frame.t(), [{:limits, Joint.translatoin_limit()}]) :: Prismatic.t()
+  @spec init(Frame.t(), [{:limits, Joint.translation_limit()}]) :: Prismatic.t()
   def init(%Frame{} = frame, limits: {lower, upper}) when is_number(lower) and is_number(upper) do
     %Prismatic{frame: frame, limits: {lower, upper}, position: lower}
   end

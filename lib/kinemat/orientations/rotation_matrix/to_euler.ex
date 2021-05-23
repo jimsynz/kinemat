@@ -19,7 +19,7 @@ defmodule Kinemat.Orientations.RotationMatrix.ToEuler do
   @doc """
   Convert a RotationMatrix into a Euler of the specified order.
   """
-  @spec to_euler(RotationMatrix.t(), Euler.valid_orientation()) :: Euler.t()
+  @spec to_euler(RotationMatrix.t(), Euler.valid_representation()) :: Euler.t()
   def to_euler(%RotationMatrix{matrix: matrix}, representation) do
     {x, y, z} = compute_euler(matrix, representation)
     Euler.init(representation, Radian.init(x), Radian.init(y), Radian.init(z))
