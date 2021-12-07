@@ -77,7 +77,7 @@ pages:
     paths:
       - public
   only:
-    - master
+    - main
 
 git_ops:
   image: elixir:latest
@@ -86,7 +86,7 @@ git_ops:
   stage: release
   only:
     refs:
-      - master
+      - main
   except:
     variables:
       - $CI_COMMIT_MESSAGE =~ /chore\:\ release version/
@@ -126,7 +126,6 @@ release-gitlab:
       --tag-name "v${APP_VERSION}" \
       --assets-link "{\"name\":\"${APP_NAME}-${APP_VERSION}.tar.gz\",\"url\":\"${PACKAGE_REGISTRY_URL}/${APP_NAME}/${APP_VERSION}/${APP_NAME}-${APP_VERSION}.tar.gz\"}" \
       --assets-link "{\"name\":\"${APP_NAME}-${APP_VERSION}-docs.tar.gz\",\"url\":\"${PACKAGE_REGISTRY_URL}/${APP_NAME}/${APP_VERSION}/${APP_NAME}-${APP_VERSION}-docs.tar.gz\"}"
-
 # release-hex:
 #   image: elixir:latest
 #   dependencies:
