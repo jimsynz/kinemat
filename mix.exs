@@ -39,7 +39,7 @@ defmodule Kinemat.Mixfile do
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
-      {:angle, ">= 0.2.1"},
+      {:angle, ">= 0.3.0"},
       {:credo, "~> 1.4", only: ~w(dev test)a, runtime: false},
       {:ex_doc, ">= 0.0.0", only: ~w(dev test)a},
       {:earmark, ">= 0.0.0", only: ~w(dev test)a},
