@@ -44,7 +44,7 @@ defmodule Kinemat.Mixfile do
       {:ex_doc, ">= 0.0.0", only: ~w(dev test)a},
       {:earmark, ">= 0.2.1", only: ~w(dev test)a},
       {:git_ops, "~> 2.4", only: ~w[dev test]a, runtime: false},
-      {:graphmath, "~> 2.0"}
+      {:graphmath, "~> 2.5"}
     ]
   end
 end
