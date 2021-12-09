@@ -41,7 +41,7 @@ defmodule Kinemat.Mixfile do
     [
       {:angle, ">= 0.3.0"},
       {:credo, "~> 1.6", only: ~w(dev test)a, runtime: false},
-      {:ex_doc, ">= 0.0.0", only: ~w(dev test)a},
+      {:ex_doc, ">= 0.26.0", only: ~w(dev test)a},
       {:earmark, ">= 1.4.19", only: ~w(dev test)a},
       {:git_ops, "~> 2.4", only: ~w[dev test]a, runtime: false},
       {:graphmath, "~> 2.5"}
