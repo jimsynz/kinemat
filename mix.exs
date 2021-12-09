@@ -40,7 +40,7 @@ defmodule Kinemat.Mixfile do
   defp deps do
     [
       {:angle, ">= 0.3.0"},
-      {:credo, "~> 1.4", only: ~w(dev test)a, runtime: false},
+      {:credo, "~> 1.6", only: ~w(dev test)a, runtime: false},
       {:ex_doc, ">= 0.0.0", only: ~w(dev test)a},
       {:earmark, ">= 1.4.19", only: ~w(dev test)a},
       {:git_ops, "~> 2.4", only: ~w[dev test]a, runtime: false},
