@@ -7,7 +7,7 @@ defimpl Kinemat.Point, for: Kinemat.Coordinates.Spherical do
   """
 
   @doc """
-  Convert a point in sperical space into cylindrical space.
+  Convert a point in spherical space into cylindrical space.
 
   ## Examples
 
