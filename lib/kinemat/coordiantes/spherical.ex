@@ -3,13 +3,13 @@ defmodule Kinemat.Coordinates.Spherical do
   defstruct ~w(radial azimuth polar)a
 
   @moduledoc """
-  Describes a point in 3D space using sperical notation (r,θ,ɸ).
+  Describes a point in 3D space using spherical notation (r,θ,ɸ).
   """
 
   @type t :: %Spherical{radial: number, azimuth: Angle.t(), polar: Angle.t()}
 
   @doc """
-  Initialise a sperical coordinate point from `rho`, `theta` and `phi` (r,θ,ɸ).
+  Initialise a spherical coordinate point from `rho`, `theta` and `phi` (r,θ,ɸ).
 
   ## Examples
 
