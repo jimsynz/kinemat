@@ -1,5 +1,10 @@
 defprotocol Kinemat.Orientation do
-  alias Kinemat.{Orientation, Euler, RotationMatrix, Quaternion}
+  alias Kinemat.{
+    Orientation,
+    Orientations.Euler,
+    Orientations.RotationMatrix,
+    Orientations.Quaternion
+  }
 
   @moduledoc """
   The Orientation protocol is used to convert between and manipulate the

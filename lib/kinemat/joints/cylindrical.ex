@@ -47,8 +47,8 @@ defmodule Kinemat.Joints.Cylindrical do
   def init(%Frame{} = frame, []), do: init(frame)
 
   def init(%Frame{} = frame, options) when is_list(options) do
-    rlimits = Keyword.fetch(options, :rotation_limits)
-    tlimits = Keyword.fetch(options, :translation_limits)
+    rlimits = Keyword.get(options, :rotation_limits)
+    tlimits = Keyword.get(options, :translation_limits)
 
     crot =
       case rlimits do

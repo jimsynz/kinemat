@@ -1,5 +1,5 @@
 defprotocol Kinemat.Point do
-  alias Kinemat.{Point, Cartesian, Cylindrical, Spherical}
+  alias Kinemat.{Point, Coordinates.Cartesian, Coordinates.Cylindrical, Coordinates.Spherical}
 
   @moduledoc """
   Describes a Point in 3 dimensional space.

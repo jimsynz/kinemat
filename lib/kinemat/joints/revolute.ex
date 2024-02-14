@@ -8,7 +8,11 @@ defmodule Kinemat.Joints.Revolute do
   Describes a [Revolute](https://en.wikipedia.org/wiki/Revolute_joint) (AKA Hinged) joint.
   """
 
-  @type t :: %Revolute{frame: Frame.t(), limits: nil | Join.rotation_limit(), position: Angle.t()}
+  @type t :: %Revolute{
+          frame: Frame.t(),
+          limits: nil | Joint.rotation_limit(),
+          position: Angle.t()
+        }
 
   @doc """
   Initialize a new revolute joint from a reference frame.

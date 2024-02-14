@@ -1,3 +1,6 @@
+[![Build Status](https://drone.harton.dev/api/badges/james/kinemat/status.svg)](https://drone.harton.dev/james/kinemat)
+[![Hippocratic License HL3-FULL](https://img.shields.io/static/v1?label=Hippocratic%20License&message=HL3-FULL&labelColor=5e2751&color=bc8c3d)](https://firstdonoharm.dev/version/3/0/full.html)
+
 # Kinemat
 
 Kinemat is the beginnings of a library for solving forward and reverse
@@ -32,7 +35,7 @@ information.
 ### Representing spacial coordinates
 
 Kinemat uses the `Point` protocol to handle manipulations of spacial
-coordinates.  The protocol is implemented by `Cartesian`, `Cylindrical` and
+coordinates. The protocol is implemented by `Cartesian`, `Cylindrical` and
 `Spherical`.
 
     iex> use Kinemat
@@ -116,6 +119,12 @@ Documentation can be generated with [ExDoc](https://github.com/elixir-lang/ex_do
 and published on [HexDocs](https://hexdocs.pm). Once published, the docs can
 be found at [https://hexdocs.pm/kinemat](https://hexdocs.pm/kinemat).
 
+## Github Mirror
+
+This repository is mirrored [on Github](https://github.com/jimsynz/kinemat)
+from it's primary location [on my Forejo instance](https://harton.dev/james/kinemat).
+Feel free to raise issues and open PRs on Github.
+
 ## License
 
 This software is licensed under the terms of the
@@ -123,7 +132,7 @@ This software is licensed under the terms of the
 this package for the terms.
 
 This license actively proscribes this software being used by and for some
-industries, countries and activities.  If your usage of this software doesn't
+industries, countries and activities. If your usage of this software doesn't
 comply with the terms of this license, then [contact me](mailto:james@harton.nz)
 with the details of your use-case to organise the purchase of a license - the
 cost of which may include a donation to a suitable charity or NGO.

@@ -48,7 +48,7 @@ defimpl Kinemat.Orientation, for: Kinemat.Orientations.RotationMatrix do
   @spec to_euler(RotationMatrix.t()) :: Euler.t()
   def to_euler(orientation), do: RotationMatrix.ToEuler.to_euler(orientation, :xyz)
 
-  @spec to_euler(RotationMatrix.t(), Euler.valid_orientation()) :: Euler.t()
+  @spec to_euler(RotationMatrix.t(), Euler.valid_representation()) :: Euler.t()
   def to_euler(orientation, representation),
     do: RotationMatrix.ToEuler.to_euler(orientation, representation)
 end

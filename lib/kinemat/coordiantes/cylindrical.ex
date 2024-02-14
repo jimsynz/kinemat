@@ -32,7 +32,7 @@ defmodule Kinemat.Coordinates.Cylindrical do
   @doc """
   Alias for `radial/1`.
   """
-  @spec rho(t) :: number
+  @spec rho(t) :: Angle.t()
   def rho(point), do: point |> azimuth()
 
   @doc """
