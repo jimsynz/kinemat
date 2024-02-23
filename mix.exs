@@ -5,7 +5,7 @@ defmodule Kinemat.Mixfile do
   Forward and reverse kinematics for robotics and simulations.
   """
 
-  @version "1.0.0"
+  @version "1.0.1"
 
   def project do
     [

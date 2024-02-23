@@ -16,7 +16,7 @@ For now, you can install it as a Git dependency:
 
 ```elixir
 def deps do
-  [{:kinemat, "~> 1.0.0"}]
+  [{:kinemat, "~> 1.0.1"}]
 end
 ```
 

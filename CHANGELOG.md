@@ -5,6 +5,11 @@ See [Conventional Commits](Https://conventionalcommits.org) for commit guideline
 
 <!-- changelog -->
 
+## [v1.0.1](https://harton.dev/james/kinemat/compare/v1.0.0...v1.0.1) (2024-02-23)
+
+
+
+
 ## [v1.0.0](https://harton.dev/james/kinemat/compare/v0.1.0...v1.0.0) (2023-01-16)
 
 ### Breaking Changes:
