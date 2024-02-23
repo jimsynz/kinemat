@@ -20,6 +20,8 @@ def deps do
 end
 ```
 
+Docs are available on [docs.harton.nz](https://docs.harton.nz/james/kinemat).
+
 ## Usage
 
 ### Representing angles regardless of unit

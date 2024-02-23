@@ -15,7 +15,11 @@ defmodule Kinemat.Mixfile do
       start_permanent: Mix.env() == :prod,
       package: package(),
       deps: deps(),
-      description: @description
+      description: @description,
+      docs: [
+        main: "readme",
+        extras: ["README.md", "CHANGELOG.md"]
+      ]
     ]
   end
 
@@ -24,7 +28,10 @@ defmodule Kinemat.Mixfile do
       maintainers: ["James Harton <james@harton.nz>"],
       licenses: ["HL3-FULL"],
       links: %{
-        "Source" => "https://harton.dev/james/kinemat"
+        "Source" => "https://harton.dev/james/kinemat",
+        "GitHub" => "https://github.com/jimsynz/kinemat",
+        "Changelog" => "https://docs.harton.nz/james/kinemat/changelog.html",
+        "Sponsor" => "https://github.com/sponsors/jimsynz"
       }
     ]
   end
