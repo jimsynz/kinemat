@@ -124,7 +124,7 @@ be found at [https://hexdocs.pm/kinemat](https://hexdocs.pm/kinemat).
 ## Github Mirror
 
 This repository is mirrored [on Github](https://github.com/jimsynz/kinemat)
-from it's primary location [on my Forejo instance](https://harton.dev/james/kinemat).
+from it's primary location [on my Forgejo instance](https://harton.dev/james/kinemat).
 Feel free to raise issues and open PRs on Github.
 
 ## License
