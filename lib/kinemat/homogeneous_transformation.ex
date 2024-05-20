@@ -23,8 +23,8 @@ defmodule Kinemat.HomogeneousTransformation do
       ...> Frame.init(point, orientation)
       ...> |> Kinemat.HomogeneousTransformation.to_homogeneous_transformation()
       {1.0, 0.0, 0.0, 0.0,
-       0.0, 1.0, 0.0, 0.0,
-       0.0, 0.0, 1.0, 0.0,
+       -0.0, 1.0, 0.0, 0.0,
+       0.0, -0.0, 1.0, 0.0,
        0.0, 0.0, 0.0, 1.0}
   """
   @spec to_homogeneous_transformation(Frame.t()) :: t
